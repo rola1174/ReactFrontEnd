@@ -1,0 +1,59 @@
+.cardDesign {
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .card-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .apply-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .apply-button:hover {
+    background-color: #218838;
+  }
+  
+  .save-icon {
+    color: #007bff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .save-icon:hover {
+    color: #0056b3;
+  }
+  
