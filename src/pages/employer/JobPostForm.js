@@ -23,7 +23,7 @@ export const JobPostForm = () => {
         setJobPost({ ...jobPost, loading: true });
 
         axios
-            .post("https://localhost:7163/api/employer-dashboard-home/JobPostForm", {
+            .post("https://localhost:7163/api/employer/JobPostForm", {
                 employerName: form.current.employerName.value,
                 jobType: form.current.jobType.value,
                 jobBudget: form.current.jobBudget.value,

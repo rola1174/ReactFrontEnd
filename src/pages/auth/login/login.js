@@ -607,10 +607,10 @@ export const Login = () => {
           navigate("/admin-home");
 
         } else if (user.role === "Employer") {
-          navigate("/employer-dashboard");
+          navigate("/employer");
         }
         else {
-          navigate("/job-seeker-dashboard");
+          navigate("/job-seeker");
         }
       })
       .catch((errors) => {

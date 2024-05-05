@@ -208,11 +208,11 @@ import { AuthGuard } from "./pages/guards/auth.guard";
 import { UpdateEmployer } from "./pages/admin/update-employer/update-employer";
 import { ShowEmployer } from "./pages/admin/show-employer/show-employer";
 import { AdminDashboard } from "./pages/admin/home/admin-dashboard";
-import { ApplyForm } from "./pages/job-seeker/apply-form";
+import {ApplyForm} from "./pages/job-seeker/ApplyForm";
 import CommunicateWithEmployer from "./pages/job-seeker/communicateWithEmployer";
 import { JobPostForm } from "./pages/employer/JobPostForm";
-import { EmployerDashboard } from "./pages/employer/employer-dashboard";
-
+import { EmployerDashboard } from "./pages/employer/employer-dashboard"; 
+import ChatApp from "./pages/communication/communication";
 export const routes = createBrowserRouter([
   {
     path: "", //localhost:3000
@@ -274,7 +274,7 @@ export const routes = createBrowserRouter([
             element: < EmployerDashboard />,
           },
           {
-            path: "/JobPostForm",
+            path: "/employer/create-job",
             element: < JobPostForm />,
           },
         ],
@@ -287,6 +287,19 @@ export const routes = createBrowserRouter([
           {
             path: "/apply/:id",
             element: <ApplyForm />,
+          },
+          /*{
+            path: "/job-seeker-dashboard/:jobId", // Add dynamic parameter for jobId
+            element: <JobSeekerDashboard />,
+          },*/
+        ],
+      },
+      {
+        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
+        children: [
+          {
+            path: "/communication",
+            element: <ChatApp />,
           },
           /*{
             path: "/job-seeker-dashboard/:jobId", // Add dynamic parameter for jobId

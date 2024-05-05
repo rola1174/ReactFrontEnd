@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import axios from "axios";
+//import axios from "axios";
 import "./job_card.css";
 // import { ApplyForm } from "../../job-seeker/apply-form";
 
 export const JobCard = (props) => {
   const navigate = useNavigate();
-  const [savedJob, setSavedJob] = useState(0);
+  const [savedJob, setSavedJob] = useState(false);
 
   const handleCardClick = () => {
     navigate(`/details/${props.id}`);
@@ -17,8 +17,8 @@ export const JobCard = (props) => {
     navigate(`/apply/${props.id}`);
   };
 
-  const handleSaveClick = (val) => {
-    setSavedJob(val);
+  const handleSaveClick = (value) => {
+    setSavedJob(value);
     console.log("Save button clicked for job ID:", props.id);
   };
 
@@ -39,14 +39,18 @@ export const JobCard = (props) => {
             <h6>Job type</h6>
             <h2>Job Title</h2>
           </div>
-          <div className="star-save" onClick={() => handleSaveClick(1)}>
-            {(savedJob === 0) ?
-              < FaRegStar key={JobCard.id} /> :
-              < FaStar key={JobCard.id} color="orange" />
-            }
-          </div>
+          {
+            savedJob ? (
+          <div className="star-save" onClick={() => handleSaveClick(false)}>
+              <FaStar key={props.id} color="orange" /></div>
+            ) : (
+              <div className="star-save" onClick={() => handleSaveClick(true)}>
+              <FaRegStar key={props.id} />
+              </div>
+            )
+          }
 
-          <button className="btn" onClick={handleApplyClick} >Apply</button>
+          <button className="btn" onClick={handleApplyClick}>Apply</button>
         </div>
       </div>
     </div>
