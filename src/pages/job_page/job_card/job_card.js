@@ -207,7 +207,7 @@ export const JobCard = (props) => {
 };*/
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaRegSave } from "react-icons/fa";
+import { FaRegSave, FaRegStar, FaStar } from "react-icons/fa";
 import "./job_card.css";
 import { ApplyForm } from "../../job-seeker/apply-form";
 
@@ -221,7 +221,8 @@ export const JobCard = (props) => {
   };
 
   const handleApplyClick = () => {
-    setShowApplyForm(true);
+    //setShowApplyForm(true);
+    navigate(`/apply/${props.id}`);
   };
 
   const handleSaveClick = () => {
@@ -229,35 +230,102 @@ export const JobCard = (props) => {
   };
 
   return (
-    <div className="cardDesign">
-      <div className="card" onClick={handleCardClick}>
-        <div className="card-body">
-          <h4 className="card-title">{props.title}</h4>
-          <span className="card-text">
-            {props.jobBudget} - {props.jobType}
-          </span>
-          {props.id === 1 ? (
-            <p className="card-text">
-              OneHealth is a world-class healthcare provider present in Egypt,
-              Nigeria & expanding in Africa...
-            </p>
-          ) : null}
+    <>
+      <div className="cardDesign">
+        <div className="card">
+          <div className="card-body" onClick={handleCardClick}>
+            <h4 className="card-title">{props.title}</h4>
+            <span className="card-text">
+              {props.jobBudget} - {props.jobType}
+            </span>
+            {props.id === 1 ? (
+              <p className="card-text">
+                OneHealth is a world-class healthcare provider present in Egypt,
+                Nigeria & expanding in Africa...
+              </p>
+            ) : null}
+          </div>
+          <div className="card-buttons">
+            <button className="apply-button" onClick={handleApplyClick}>
+              Apply
+            </button>
+            <button className="save-icon" onClick={handleSaveClick} title="Add to saved jobs">
+              <FaRegSave style={{ color: "green" }} />
+            </button>
+          </div>
         </div>
       </div>
-      <div className="card-buttons">
-        <button className="apply-button" onClick={handleApplyClick}>
-          Apply
-        </button>
-        <button className="save-button" onClick={handleSaveClick}>
-          <FaRegSave />
-        </button>
+
+
+      <div class="courses-container">
+        <div class="course">
+          <div class="course-preview">
+            <h6>Industry</h6>
+            <h2>Company Name</h2>
+            <a href="#">Post creation date<i class="fas fa-chevron-right"></i></a>
+          </div>
+          <div class="course-info">
+            <div class="progress-container">
+              <div class="progress"></div>
+              <span class="progress-text">
+                location
+              </span>
+            </div>
+            <h6>Job type</h6>
+            <h2>Job Title</h2>
+            {/* <div className="tooltip"> */}
+            <div className="star-save">
+              < FaRegStar ></FaRegStar>
+              {/* <span className="tooltiptext">Save Job</span> */}
+            </div>
+            {/* </div> */}
+            <button class="btn" onClick={handleApplyClick} >Apply</button>
+          </div>
+        </div>
       </div>
-      {showApplyForm && (
+
+      {/* <div class="social-panel-container">
+        <div class="social-panel">
+          <p>Created with <i class="fa fa-heart"></i> by
+            <a target="_blank" href="https://florin-pop.com">Florin Pop</a></p>
+          <button class="close-btn"><i class="fas fa-times"></i></button>
+          <h4>Get in touch on</h4>
+          <ul>
+            <li>
+              <a href="https://www.patreon.com/florinpop17" target="_blank">
+                <i class="fab fa-discord"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/florinpop1705" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/florinpop17" target="_blank">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com/florinpop17" target="_blank">
+                <i class="fab fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/florinpop17" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div> */}
+
+      {/* {showApplyForm && (
         <ApplyForm
           jobId={props.id}
           onClose={() => setShowApplyForm(false)}
         />
-      )}
-    </div>
+      )} */}
+    </>
   );
 };

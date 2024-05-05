@@ -217,17 +217,17 @@ export const routes = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "/",
+        element: <JobPage />,
+      },
+      {
+        path: "/details/:id",
+        element: <DetailsPage />,
+      },
+      {
         // Guard
         element: <AuthGuard roles={[]} />,
         children: [
-          {
-            path: "/",
-            element: <JobPage />,
-          },
-          {
-            path: "/details/:id",
-            element: <DetailsPage />,
-          },
           {
             path: "/login",
             element: <Login />,
@@ -237,7 +237,7 @@ export const routes = createBrowserRouter([
             element: <Register />,
           },
           {
-            path: "/apply",
+            path: "/apply/:id",
             element: <ApplyForm />,
           },
           {

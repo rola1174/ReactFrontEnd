@@ -1,59 +1,201 @@
 .cardDesign {
-    margin-bottom: 20px;
+  margin: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  width: 40%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  transition: box-shadow 0.3s ease;
+}
+
+.card {}
+
+.card:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/*card-buttons no user*/
+.card-buttons {
+  display: inline-block;
+
+}
+
+.apply-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  float: right;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  background-color: #218838;
+}
+
+.save-icon {
+  color: #007bff;
+  font-size: 20px;
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.save-icon:hover {
+  color: #0056b3;
+}
+
+@media only screen and (max-width: 813px) {
+
+  .cardDesign {
+    margin: 20px;
+    margin-right: 40px;
+    margin-left: 40px;
+    width: 80%;
   }
-  
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
-  .card-title {
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .card-text {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .card-buttons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .apply-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .apply-button:hover {
-    background-color: #218838;
-  }
-  
-  .save-icon {
-    color: #007bff;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .save-icon:hover {
-    color: #0056b3;
-  }
-  
+}
+
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* body {
+  /*background-image: linear-gradient(45deg, #7175da, #9790F2);
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+} */
+
+.courses-container {
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*min-height: 100vh;*/
+  margin: 0;
+}
+
+.course {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  max-width: 100%;
+  margin: 20px;
+  overflow: hidden;
+  width: 700px;
+}
+
+.course h6 {
+  opacity: 0.6;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.course h2 {
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+
+.course-preview {
+  background-color: #2A265F;
+  color: #fff;
+  padding: 30px;
+  max-width: 50%;
+}
+
+.course-preview a {
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.course-info {
+  padding: 30px;
+  position: relative;
+  width: 100%;
+}
+
+.progress-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  text-align: right;
+  width: 150px;
+}
+
+.progress {
+  background-color: #ddd;
+  border-radius: 3px;
+  height: 5px;
+  width: 100%;
+}
+
+.progress::after {
+  border-radius: 3px;
+  background-color: #2A265F;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 66%;
+}
+
+.progress-text {
+  font-size: 10px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.btn {
+  background-color: #2A265F;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 25px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  letter-spacing: 1px;
+}
+
+.star-save {
+  position: absolute;
+  bottom: 40px;
+  right: 140px;
+  font-size: 25px;
+}
