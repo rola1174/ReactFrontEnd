@@ -605,8 +605,8 @@ export const Login = () => {
         setAuthToken(data.data.token);
         if (user.role === "Admin") {
           navigate("/admin-home");
-          
-        } else if (user.role === "employer") {
+
+        } else if (user.role === "Employer") {
           navigate("/employer-dashboard");
         }
         else {
@@ -660,9 +660,7 @@ export const Login = () => {
                 <div className="card-body">
                   <form onSubmit={(e) => submit(e)}>
                     <div className="mb-3">
-                      <label className="small mb-1" htmlFor="email">
-                        Email address
-                      </label>
+                      <label className="small mb-1" htmlFor="email">Email address</label>
                       <input
                         className="form-control"
                         type="text"
@@ -673,9 +671,7 @@ export const Login = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="small mb-1" htmlFor="password">
-                        Password
-                      </label>
+                      <label className="small mb-1" htmlFor="password">Password</label>
                       <input
                         className="form-control"
                         type="text"
@@ -685,9 +681,7 @@ export const Login = () => {
                         }}
                       />
                     </div>
-                    <button className="btn btn-primary form-control" type="submit">
-                      Login
-                    </button>
+                    <button className="btn btn-primary form-control" type="submit">Login</button>
                   </form>
                 </div>
               </div>

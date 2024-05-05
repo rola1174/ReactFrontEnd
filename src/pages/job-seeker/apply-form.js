@@ -49,5 +49,3 @@ export const ApplyForm = ({ jobId }) => {
     </form>
   );
 };
-
-export default ApplyForm;

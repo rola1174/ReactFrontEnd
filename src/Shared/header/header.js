@@ -84,7 +84,6 @@ import image from "../../assets/images/logo512.png";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuthToken, removeAuthToken } from "../../services/auth";
 
-
 export const AppHeader = () => {
   const { token, user } = getAuthToken();
   const navigate = useNavigate();
@@ -131,7 +130,7 @@ export const AppHeader = () => {
                   Login
                 </Link>
               </li>
-              
+
               <li className="nav-item">
                 <Link to={"/register"} className="nav-link">
                   Register
@@ -151,8 +150,16 @@ export const AppHeader = () => {
               <span className="nav-link">Logout</span>
             </li>
           )}
+          {user && user.role === "employer" && (
+            <li className="nav-item">
+              <Link to={"/JobPostForm"} className="nav-link">
+                Create Job Post
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </>
   );
 };
+

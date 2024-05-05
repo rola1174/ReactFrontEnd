@@ -208,8 +208,10 @@ import { AuthGuard } from "./pages/guards/auth.guard";
 import { UpdateEmployer } from "./pages/admin/update-employer/update-employer";
 import { ShowEmployer } from "./pages/admin/show-employer/show-employer";
 import { AdminDashboard } from "./pages/admin/home/admin-dashboard";
-import ApplyForm from "./pages/job-seeker/apply-form";
+import { ApplyForm } from "./pages/job-seeker/apply-form";
 import CommunicateWithEmployer from "./pages/job-seeker/communicateWithEmployer";
+import { JobPostForm } from "./pages/employer/JobPostForm";
+import { EmployerDashboard } from "./pages/employer/employer-dashboard";
 
 export const routes = createBrowserRouter([
   {
@@ -237,10 +239,6 @@ export const routes = createBrowserRouter([
             element: <Register />,
           },
           {
-            path: "/apply/:id",
-            element: <ApplyForm />,
-          },
-          {
             path: "/communicate",
             element: <CommunicateWithEmployer />,
           },
@@ -266,38 +264,34 @@ export const routes = createBrowserRouter([
           },
         ],
       },
+
+      {
+        //element: <AuthGuard roles={["Employer"]} />,
+        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
+        children: [
+          {
+            path: "/employer",
+            element: < EmployerDashboard />,
+          },
+          {
+            path: "/JobPostForm",
+            element: < JobPostForm />,
+          },
+        ],
+      },
       {
         // Guard
         //element: <AuthGuard roles={["Job Seeker"]} />,
         element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
           {
-            path: "/",
-            element: <JobPage />,
-          },
-          {
-            path: "/details/:id",
-            element: <DetailsPage />,
+            path: "/apply/:id",
+            element: <ApplyForm />,
           },
           /*{
             path: "/job-seeker-dashboard/:jobId", // Add dynamic parameter for jobId
             element: <JobSeekerDashboard />,
           },*/
-        ],
-      },
-      {
-        // Guard
-        //element: <AuthGuard roles={["Employer"]} />,
-        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
-        children: [
-          // {
-          //   path: "/",  //get jobs only that belong to the employer
-          //   element: <JobPage />,
-          // },
-          // {
-          //   path: "/details/:id",
-          //   element: <DetailsPage />,
-          // },
         ],
       },
       {
