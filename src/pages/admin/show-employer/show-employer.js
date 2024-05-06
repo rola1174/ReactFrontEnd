@@ -15,10 +15,10 @@ export const ShowEmployer = () => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7047/api/User/userWithRole/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .get(`https://localhost:7163/api/Admin/GetEmployerById/${id}`, {
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       })
       .then((response) => {
         setSpecificUser({ ...specificUser, result: response.data, loading: false, err: null });
@@ -33,9 +33,6 @@ export const ShowEmployer = () => {
             Company_name: "",
             Company_description: "",
             Mainaddress: "",
-            userType: {
-              role: "",
-            },
           },
           loading: false,
           err: [{ msg: `Something went wrong` }],
@@ -85,13 +82,7 @@ export const ShowEmployer = () => {
                 <div className="card-body">
                   <div className="mb-3">
                     <label className="small mb-1">UserName </label>
-                    <input className="form-control" type="text" readOnly value={specificUser.result.Username} />
-                  </div>
-                  <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="small mb-1">Role</label>
-                      <input className="form-control" type="text" readOnly value={specificUser.result.userType.role} />
-                    </div>
+                    <input className="form-control" type="text" readOnly value={specificUser.result.username} />
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1">Email address</label>
@@ -100,17 +91,17 @@ export const ShowEmployer = () => {
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1">Company_name</label>
-                    <input className="form-control" type="email" readOnly value={specificUser.result.Company_name} />
+                    <input className="form-control" type="email" readOnly value={specificUser.result.company_name} />
 
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1">Company_description</label>
-                    <input className="form-control" type="email" readOnly value={specificUser.result.Company_description} />
+                    <input className="form-control" type="email" readOnly value={specificUser.result.company_description} />
 
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1">Mainaddress</label>
-                    <input className="form-control" type="email" readOnly value={specificUser.result.Mainaddress} />
+                    <input className="form-control" type="email" readOnly value={specificUser.result.mainaddress} />
                   </div>
 
                 </div>

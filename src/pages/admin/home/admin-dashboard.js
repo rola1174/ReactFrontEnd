@@ -118,6 +118,8 @@ export const AdminDashboard = () => {
                             <table className="table project-list-table table-nowrap align-middle table-borderless">
                               <thead>
                                 <tr>
+                                  <th scope="col">Employer Number</th>
+                                  <th scope="col">Employer Id</th>
                                   <th scope="col">Employer Name</th>
                                   <th scope="col">Employer Email</th>
                                 </tr>
@@ -126,6 +128,8 @@ export const AdminDashboard = () => {
                                 {users.result.map((user, index) => {
                                   return (
                                     <tr key={index}>
+                                      <td>{index + 1}</td>
+                                      <td>{user.employerId}</td>
                                       <td>{user.username}</td>
                                       <td>{user.email}</td>
                                       <td>
@@ -134,13 +138,15 @@ export const AdminDashboard = () => {
                                       <td>
                                         <ul className="list-inline mb-0">
                                           <li className="list-inline-item">
-                                            <Link to={`/show-employer/${user.id}`} className="px-2 text-primary">
+                                            <Link to={`/show-employer/${user.employerId}`} className="px-2 text-primary">
                                               <BsDisplay style={{ color: "green" }} />
                                             </Link>
                                           </li>
                                           <li className="list-inline-item">
                                             <a href="#" className="px-2 text-primary">
-                                              <BsPencil style={{ color: "blue" }} />
+                                              <Link to={`/update-employer/${user.employerId}`} className="px-2 text-primary">
+                                                <BsPencil style={{ color: "blue" }} />
+                                              </Link>
                                             </a>
                                           </li>
                                           <li className="list-inline-item">
@@ -148,7 +154,7 @@ export const AdminDashboard = () => {
                                               onClick={() => {
                                                 setEmployers({ ...users, loading: true, err: null });
                                                 axios
-                                                  .delete(`https://localhost:7047/api/User/${user.id}`, {
+                                                  .delete(`https://localhost:7163/api/Admin/DeleteEmployer/${user.employerId}`, {
                                                     headers: {
                                                       Authorization: `Bearer ${token}`,
                                                     },
