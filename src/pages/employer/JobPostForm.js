@@ -15,34 +15,24 @@ export const JobPostForm = () => {
         location: "",
         industry: "",
         salary_budget: "",
-        no_of_proposal_submitted: "",
         no_of_proposal_required: "",
-        empid: "1",
-
-
-
-
+        empid: "",
     });
 
 
     const submit = (e) => {
         e.preventDefault();
         setJobPost({ ...jobPost, loading: true });
-
         axios
-            .post("https://localhost:7163/api/employer/JobPostForm", {
+            .post("https://localhost:7163/api/Employer/CreateJobPost", {
                 job_title: form.current.job_title.value,
                 job_description: form.current.job_description.value,
+                job_type: form.current.job_type.value,
                 location: form.current.location.value,
                 industry: form.current.industry.value,
                 salary_budget: form.current.salary_budget.value,
-                no_of_proposal_submitted: form.current.no_of_proposal_submitted.value,
                 no_of_proposal_required: form.current.no_of_proposal_required.value,
-                empid: form.current.empid.value,
-
-
-
-
+                empid: 11,
             })
             .then((response) => {
                 setJobPost({ ...jobPost, loading: false, result: response.data });
@@ -98,6 +88,11 @@ export const JobPostForm = () => {
                             <div className="card mb-4">
                                 <div className="card-header">Create new Job Post</div>
                                 <div className="card-body">
+                                    {jobPost.result && Object.keys(jobPost.result).length > 0 && (
+                                        <div className="alert alert-success" role="alert">
+                                            Job created successfully!
+                                        </div>
+                                    )}
                                     <form onSubmit={(e) => submit(e)}>
                                         <div className="row gx-3 mb-3">
                                             <div className="col-md-6">
@@ -112,6 +107,24 @@ export const JobPostForm = () => {
                                                     required
                                                 />
                                             </div>
+
+                                            <div className="col-md-6">
+                                                <label className="small mb-1" htmlFor="Latest-certification">Job Type</label>
+                                                <select
+                                                    className="form-control"
+                                                    id="Latest-certification"
+                                                    ref={(val) => {
+                                                        form.current.job_type = val;
+                                                    }}
+                                                    required
+                                                >
+                                                    <option value="">Select job type</option>
+                                                    <option value="High School">Part time</option>
+                                                    <option value="Bachelor Degree">Full Time</option>
+                                                    <option value="Master Degree">Remote</option>
+                                                </select>
+                                            </div>
+
                                             <div className="col-md-6">
                                                 <label className="small mb-1" htmlFor="lastName">job Description</label>
                                                 <input
@@ -165,38 +178,13 @@ export const JobPostForm = () => {
                                         </div>
 
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="password">no_of_proposal_submitted</label>
-                                            <input
-                                                className="form-control"
-                                                type="number"
-                                                id="no_of_proposal_submitted"
-                                                ref={(val) => {
-                                                    form.current.no_of_proposal_submitted = val;
-                                                }}
-                                                required
-                                            />
-                                        </div>
-
-                                        <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="password">no_of_proposal_required</label>
+                                            <label className="small mb-1" htmlFor="password">no_of_positions_required</label>
                                             <input
                                                 className="form-control"
                                                 type="number"
                                                 id="no_of_proposal_required"
                                                 ref={(val) => {
                                                     form.current.no_of_proposal_required = val;
-                                                }}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="password">employer id</label>
-                                            <input
-                                                className="form-control"
-                                                type="id"
-                                                id="empid"
-                                                ref={(val) => {
-                                                    form.current.empid = val;
                                                 }}
                                                 required
                                             />
@@ -212,3 +200,5 @@ export const JobPostForm = () => {
         </>
     );
 }
+
+export default JobPostForm;

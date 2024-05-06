@@ -26,7 +26,7 @@ export const Register = () => {
     e.preventDefault();
     setRegister({ ...register, loading: true });
     axios
-      .post("https://localhost:7163/api/Auth/registeruser", {
+      .post("https://localhost:7163/Auth/registeruser", {
         username: form.current.username.value,
         first_name: form.current.firstName.value,
         last_name: form.current.lastName.value,
@@ -137,20 +137,6 @@ export const Register = () => {
                         required
                       />
                     </div>
-                    {/* <div className="mb-3">
-                      <label className="small mb-1" htmlFor="image">
-                        Profile Image
-                      </label>
-                      <input
-                        className="form-control"
-                        type="file"
-                        id="image"
-                        ref={(val) => {
-                          form.current.image = val;
-                        }}
-                        required
-                      />
-                    </div> */}
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Latest-certification">Latest Certification</label>
                       <select

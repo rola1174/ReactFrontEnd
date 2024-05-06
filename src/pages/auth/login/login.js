@@ -595,7 +595,7 @@ export const Login = () => {
     e.preventDefault();
     setLogin({ ...login, loading: true });
     axios
-      .post("https://localhost:7047/api/Auth/login", {
+      .post("https://localhost:7163/Auth/login", {
         email: form.current.email.value,
         password: form.current.password.value,
       })
