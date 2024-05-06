@@ -52,7 +52,7 @@ export const ApplyForm = ({ jobId }) => {
 */
 
 
-import React, {  useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./ApplyForm.css";
 
@@ -92,16 +92,16 @@ export const ApplyForm = (id) => {
     });
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     axios
       .get("https://localhost:7163/api/job-seeker/apply-form")
       .then((data) => {
         setApplyForm({ ...applyForm, result: data.data, loading: false, err: null });
       })
-      /*.catch((err) => {
+      .catch((err) => {
         setApplyForm({ ...applyForm, loading: false, err: [{ msg: `something went wrong ${err}` }] });
       });
-  }, []);*/
+  }, []);
 
   const loadingSpinner = () => {
     return (

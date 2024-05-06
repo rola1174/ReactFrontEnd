@@ -213,6 +213,7 @@ import CommunicateWithEmployer from "./pages/job-seeker/communicateWithEmployer"
 import { JobPostForm } from "./pages/employer/JobPostForm";
 import { EmployerDashboard } from "./pages/employer/employer-dashboard"; 
 import ChatApp from "./pages/communication/communication";
+import CreateEmployer from "./pages/admin/home/registerNewEmployer";
 export const routes = createBrowserRouter([
   {
     path: "", //localhost:3000
@@ -262,6 +263,11 @@ export const routes = createBrowserRouter([
             path: "/update-employer",
             element: <UpdateEmployer />,
           },
+          {
+            path: "/registerNewEmployer",
+            element: <CreateEmployer />,
+          },
+
         ],
       },
 
@@ -274,7 +280,7 @@ export const routes = createBrowserRouter([
             element: < EmployerDashboard />,
           },
           {
-            path: "/employer/create-job",
+            path: "/create-job",
             element: < JobPostForm />,
           },
         ],

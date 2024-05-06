@@ -262,19 +262,12 @@ export const AppHeader = () => {
               </li>
             </>
           )}
-          <li className="nav-item">
-                <Link to={"/communication"} className="nav-link">
-                Messaging...
-                </Link>
-              </li>
-          <li className="nav-item">
-              <Link to={"/employer/create-job"} className="nav-link">
-                Create Job Post
-              </Link>
-            </li>
+          
+          
+            
           {token && user && user.role === "employer" && (
             <li className="nav-item">
-              <Link to={"/employer/create-job"} className="nav-link">
+              <Link to={"employer/create-job"} className="nav-link">
                 Create Job Post
               </Link>
             </li>

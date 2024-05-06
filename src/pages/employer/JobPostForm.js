@@ -9,12 +9,19 @@ export const JobPostForm = () => {
     });
 
     const form = useRef({
-        employerName: "",
-        jobType: "",
-        jobBudget: "",
-        postCreationDate: "",
-        jobDescription: "",
-        numProposals: "",
+        job_title: "",
+        job_description: "",
+        job_type: "",
+        location: "",
+        industry: "",
+        salary_budget: "",
+        no_of_proposal_submitted: "",
+        no_of_proposal_required: "",
+        empid: "1",
+
+
+
+
     });
 
 
@@ -24,12 +31,17 @@ export const JobPostForm = () => {
 
         axios
             .post("https://localhost:7163/api/employer/JobPostForm", {
-                employerName: form.current.employerName.value,
-                jobType: form.current.jobType.value,
-                jobBudget: form.current.jobBudget.value,
-                postCreationDate: form.current.postCreationDate.value,
-                jobDescription: form.current.jobDescription.value,
-                numProposals: form.current.numProposals.value,
+                job_title: form.current.job_title.value,
+                job_description: form.current.job_description.value,
+                location: form.current.location.value,
+                industry: form.current.industry.value,
+                salary_budget: form.current.salary_budget.value,
+                no_of_proposal_submitted: form.current.no_of_proposal_submitted.value,
+                no_of_proposal_required: form.current.no_of_proposal_required.value,
+                empid: form.current.empid.value,
+
+
+
 
             })
             .then((response) => {
@@ -89,13 +101,13 @@ export const JobPostForm = () => {
                                     <form onSubmit={(e) => submit(e)}>
                                         <div className="row gx-3 mb-3">
                                             <div className="col-md-6">
-                                                <label className="small mb-1" htmlFor="firstName">employer Name</label>
+                                                <label className="small mb-1" htmlFor="firstName">job title</label>
                                                 <input
                                                     className="form-control"
                                                     type="text"
-                                                    id="employerName"
+                                                    id="job_title"
                                                     ref={(val) => {
-                                                        form.current.employerName = val;
+                                                        form.current.job_title = val;
                                                     }}
                                                     required
                                                 />
@@ -105,65 +117,86 @@ export const JobPostForm = () => {
                                                 <input
                                                     className="form-control"
                                                     type="text"
-                                                    id="jobDescription"
+                                                    id="job_description"
 
                                                     ref={(val) => {
-                                                        form.current.jobDescription = val;
+                                                        form.current.job_description = val;
                                                     }}
                                                     required
                                                 />
                                             </div>
                                         </div>
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="email">job Budget</label>
+                                            <label className="small mb-1" htmlFor="email">location</label>
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                                id="jobBudget"
+                                                id="location"
                                                 ref={(val) => {
-                                                    form.current.jobBudget = val;
+                                                    form.current.location = val;
                                                 }}
                                                 required
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="password">postCreationDate</label>
+                                            <label className="small mb-1" htmlFor="password">industry</label>
                                             <input
                                                 className="form-control"
-                                                type="date"
-                                                id="postCreationDate"
+                                                type="industry"
+                                                id="industry"
                                                 ref={(val) => {
-                                                    form.current.postCreationDate = val;
+                                                    form.current.industry = val;
                                                 }}
                                                 required
                                             />
                                         </div>
 
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="Latest-certification">Job Type </label>
-                                            <select
+                                            <label className="small mb-1" htmlFor="username">salary budget</label>
+                                            <input
                                                 className="form-control"
-                                                id="JobType"
+                                                type="text"
+                                                id="salary_budget"
                                                 ref={(val) => {
-                                                    form.current.jobType = val;
+                                                    form.current.salary_budget = val;
                                                 }}
                                                 required
-                                            >
-                                                <option value="">Select Job Type </option>
-                                                <option value="fullTime">Full Time</option>
-                                                <option value="partTime">Part Time </option>
-
-                                            </select>
+                                            />
                                         </div>
 
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="username">numProposals</label>
+                                            <label className="small mb-1" htmlFor="password">no_of_proposal_submitted</label>
                                             <input
                                                 className="form-control"
                                                 type="number"
-                                                id="numProposals"
+                                                id="no_of_proposal_submitted"
                                                 ref={(val) => {
-                                                    form.current.numProposals = val;
+                                                    form.current.no_of_proposal_submitted = val;
+                                                }}
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <label className="small mb-1" htmlFor="password">no_of_proposal_required</label>
+                                            <input
+                                                className="form-control"
+                                                type="number"
+                                                id="no_of_proposal_required"
+                                                ref={(val) => {
+                                                    form.current.no_of_proposal_required = val;
+                                                }}
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label className="small mb-1" htmlFor="password">employer id</label>
+                                            <input
+                                                className="form-control"
+                                                type="id"
+                                                id="empid"
+                                                ref={(val) => {
+                                                    form.current.empid = val;
                                                 }}
                                                 required
                                             />
