@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef,  useState } from "react";
 import axios from "axios";
 
 export const JobPostForm = () => {
@@ -24,7 +24,7 @@ export const JobPostForm = () => {
         e.preventDefault();
         setJobPost({ ...jobPost, loading: true });
         axios
-            .post("https://localhost:7163/api/Employer/CreateJobPost", {
+            .post("https://localhost:7163/api/CreateJobPost", {
                 job_title: form.current.job_title.value,
                 job_description: form.current.job_description.value,
                 job_type: form.current.job_type.value,
