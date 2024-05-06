@@ -221,13 +221,13 @@ export const AppHeader = () => {
           )}
           {user && user.role === "employer" && (
             <>
-              <li className="nav-item">
+              {/* {/* <li className="nav-item">
                 <Link to={"/employer"} className="nav-link">
                   Home
-                </Link>
-              </li>
+                </Link> 
+              </li> */}
               <li className="nav-item">
-                <Link to={"/employer/create-job"} className="nav-link">
+                <Link to={"/create-job"} className="nav-link">
                   Create Job Post
                 </Link>
               </li>
