@@ -258,7 +258,7 @@ export const routes = createBrowserRouter([
             element: <ShowEmployer />,
           },
           {
-            path: "/update-employer",
+            path: "/update-employer/:id",
             element: <UpdateEmployer />,
           },
           {

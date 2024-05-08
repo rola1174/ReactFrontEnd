@@ -1,67 +1,199 @@
+import { useRef, useEffect, useState } from "react";
+import axios from "axios";
+import { getAuthToken } from "../../../services/auth";
+import { useParams } from "react-router-dom";
 
 export const UpdateEmployer = () => {
-  return (
-    <>
+  const { id } = useParams();
+  const { token, user } = getAuthToken();
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [campanyName, setCompanyName] = useState("");
+  const [campanyDescription, setCampanyDescription] = useState("");
+  const [mainaddress, setMainAdress] = useState("");
+
+  const [specificUser, setSpecificUser] = useState({
+    loading: true,
+    result: {},
+    err: null,
+  });
+
+  const [updateEmployer, setUpdateEmployer] = useState({
+    loading: false,
+    result: {},
+    err: null,
+  });
+
+  const form = useRef({
+    username: "",
+    password: "",
+    email: "",
+    company_name: "",
+    company_description: "",
+    mainaddress: "",
+  });
+
+  useEffect(() => {
+    axios
+      .get(`https://localhost:7163/api/Admin/GetEmployerById/${id}`, {
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+      })
+      .then((response) => {
+        setSpecificUser({ ...specificUser, result: response.data, loading: false, err: null });
+        setUsername(response.username);
+        setEmail(response.email);
+        setCompanyName(response.campanyName);
+        setCampanyDescription(response.campanyDescription);
+        setMainAdress(response.mainaddress);
+      })
+      .catch((error) => {
+        setSpecificUser({
+          ...specificUser,
+          result: {
+            Username: "",
+            Password: "",
+            Email: "",
+            Company_name: "",
+            Company_description: "",
+            Mainaddress: "",
+          },
+          loading: false,
+          err: [{ msg: `Something went wrong` }],
+        });
+      });
+  }, []);
+
+  const submit = (e) => {
+    e.preventDefault();
+    setUpdateEmployer({ ...updateEmployer, loading: true });
+
+    axios
+      .put(`https://localhost:7163/api/Admin/UpdateEmployer/${id}`, {
+        username: form.current.username.value,
+        password: form.current.password.value,
+        email: form.current.email.value,
+        company_name: form.current.company_name.value,
+        company_description: form.current.company_description.value,
+        mainaddress: form.current.mainaddress.value,
+      })
+      .then((response) => {
+        setUpdateEmployer({ ...updateEmployer, loading: false, result: response.data });
+      })
+      .catch((error) => {
+        setUpdateEmployer({ ...updateEmployer, loading: false, err: error.response.data });
+      });
+  };
+
+  const loadingSpinner = () => {
+    return (
       <div className="container h-100">
         <div className="row h-100 justify-content-center align-items-center">
-          <div className="col-xl-12">
-            <div className="card mb-4">
-              <div className="card-header">Update Account Info</div>
-              <div className="card-body">
-                <form>
-                  <div className="mb-3">
-                    <label className="small mb-1" htmlFor="Username">
-                      UserName
-                    </label>
-                    <input className="form-control" type="text" id="Username" />
-                  </div>
-                  <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="small mb-1" htmlFor="role">
-                        Role
-                      </label>
-                      <select className="form-control" type="text" id="role">
-                        <option>Select an Item</option>
-                      </select>
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const error = () => {
+    return (
+      <div className="container">
+        <div className="row">
+          {specificUser.err.map((err, index) => {
+            return (
+              <div key={index} className="col-sm-12 alert alert-danger" role="alert">
+                {err.msg}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      {specificUser.err !== null && error()}
+      {specificUser.loading === true ? (
+        loadingSpinner()
+      ) : (
+        <div className="container h-100">
+          <div className="row h-100 justify-content-center align-items-center">
+            <div className="col-xl-12">
+              <div className="card mb-4">
+                <div className="card-header">Update Account Info</div>
+                <div className="card-body">
+                  {updateEmployer.result && Object.keys(updateEmployer.result).length > 0 && (
+                    <div className="alert alert-success" role="alert">
+                      Employer Updated successfully!
                     </div>
+                  )}
+                  <form onSubmit={(e) => submit(e)}>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="Username">UserName</label>
+                      <input className="form-control" type="text" id="Username" value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        ref={(val) => {
+                          form.current.username = val;
+                        }}
+                        required />
                     </div>
-                  <div className="mb-3">
-                    <label className="small mb-1" htmlFor="email">
-                      Email address
-                    </label>
-                    <input className="form-control" type="email" id="email" />
-                  </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="email">Email address</label>
+                      <input className="form-control" type="email" id="email" value={email}
+                        ref={(val) => {
+                          form.current.email = val;
+                        }}
+                        required />
+                    </div>
 
-                  <div className="mb-3">
-                    <label className="small mb-1" htmlFor="Company_name">
-                    Company_name
-                    </label>
-                    <input className="form-control" type="text" id="Company_name" />
-                  </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="email">New Password</label>
+                      <input className="form-control" type="password" id="email"
+                        ref={(val) => {
+                          form.current.password = val;
+                        }}
+                        required />
+                    </div>
 
-                  <div className="mb-3">
-                    <label className="small mb-1" htmlFor="Company_description">
-                    Company_description
-                    </label>
-                    <input className="form-control" type="text" id="Company_description" />
-                  </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="Company_name">Company_name</label>
+                      <input className="form-control" type="text" id="Company_name" value={specificUser.result.Company_name}
+                        ref={(val) => {
+                          form.current.company_name = val;
+                        }}
+                        required />
+                    </div>
 
-                  <div className="mb-3">
-                    <label className="small mb-1" htmlFor="Mainaddress">
-                    Mainaddress
-                    </label>
-                    <input className="form-control" type="text" id="Mainaddress" />
-                  </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="Company_description">Company_description</label>
+                      <input className="form-control" type="text" id="Company_description" value={specificUser.result.Company_description}
+                        ref={(val) => {
+                          form.current.company_description = val;
+                        }}
+                        required />
+                    </div>
 
-                  <button className="btn btn-primary" type="button">
-                    Update
-                  </button>
-                </form>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="Mainaddress">Mainaddress</label>
+                      <input className="form-control" type="text" id="Mainaddress" value={specificUser.result.Mainaddress}
+                        ref={(val) => {
+                          form.current.mainaddress = val;
+                        }}
+                        required />
+                    </div>
+                    <button className="btn btn-primary" type="submit">{specificUser.loading ? "Creating..." : "Create Employer"}</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
