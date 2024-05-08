@@ -9,7 +9,7 @@ const RejectJob = ({ jobId, handleReject }) => {
       const { token } = getAuthToken();
 
       // Make a DELETE request to delete the job card
-      await axios.delete(`your-backend-api-url/jobs/${jobId}`, {
+      await axios.delete(`https://localhost:7163/api/Admin/refuse-job/${jobId}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the authorization token
         },

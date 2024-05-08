@@ -48,9 +48,6 @@ export const JobCard = (props) => {
                 <AcceptJob jobId={props.id} />
                 <RejectJob jobId={props.id} />
               </div>
-              <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
-                {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
-              </div>
             </div>
           ) : (
             <>

@@ -126,12 +126,20 @@
 }
 
 .split-buttons button.reject-btn {
-  background-color: #FF6347; /* Adjust color as needed */
+  background-color: #FF6347;
+  /* Adjust color as needed */
   margin-left: 10px;
 }
 
 
 .star-save {
+  position: absolute;
+  bottom: 40px;
+  right: 140px;
+  font-size: 25px;
+}
+
+.accept-btn {
   position: absolute;
   bottom: 40px;
   right: 140px;
