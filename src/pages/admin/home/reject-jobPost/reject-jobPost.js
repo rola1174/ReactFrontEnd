@@ -1,32 +1,38 @@
-// reject-jobPost.js
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
+import { getAuthToken } from "../../../../services/auth";
 
-const RejectJobPost = ({ id, onReject }) => {
-  const [loading, setLoading] = useState(false);
+const RejectJob = ({ jobId, handleReject }) => {
+  const handleRejectClick = async () => {
+    try {
+      // Get the authentication token from local storage
+      const { token } = getAuthToken();
 
-  const rejectJob = () => {
-    setLoading(true);
-    axios
-      .patch(`https://localhost:7163/api/Admin/reject-jobPost/${id}`)
-      .then((response) => {
-        // Call the onReject callback to update UI or perform other actions
-        onReject(id);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error("Reject job error:", error);
-      })
-      .finally(() => {
-        setLoading(false);
+      // Make a DELETE request to delete the job card
+      await axios.delete(`your-backend-api-url/jobs/${jobId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the authorization token
+        },
       });
+
+      // If the request is successful, log a message
+      console.log("Job with ID:", jobId, "rejected and removed from the database.");
+
+      // Optionally, you can perform any additional actions after deleting the job card
+
+      // Call the handleReject function passed from the parent component
+      handleReject(jobId);
+    } catch (error) {
+      // If an error occurs, log the error
+      console.error("Error occurred while rejecting job:", error);
+    }
   };
 
   return (
-    <div>
-      <button onClick={rejectJob} disabled={loading}>Reject</button>
-    </div>
+    <button className="btn reject-btn" onClick={handleRejectClick}>
+      Reject
+    </button>
   );
 };
 
-export default RejectJobPost;
+export default RejectJob;

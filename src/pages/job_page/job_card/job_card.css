@@ -117,6 +117,11 @@
   letter-spacing: 1px;
 }
 
+.reject-btn {
+  background-color: #FF6347; /* Adjust color as needed */
+  margin-right: 10px;
+}
+
 .star-save {
   position: absolute;
   bottom: 40px;
