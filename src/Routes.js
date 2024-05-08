@@ -209,7 +209,6 @@ import { UpdateEmployer } from "./pages/admin/update-employer/update-employer";
 import { ShowEmployer } from "./pages/admin/show-employer/show-employer";
 import { AdminDashboard } from "./pages/admin/home/admin-dashboard";
 import { ApplyForm } from "./pages/job-seeker/ApplyForm";
-import CommunicateWithEmployer from "./pages/job-seeker/communicateWithEmployer";
 import { JobPostForm } from "./pages/employer/JobPostForm";
 import { EmployerDashboard } from "./pages/employer/employer-dashboard";
 import ChatApp from "./pages/communication/com";
@@ -241,10 +240,7 @@ export const routes = createBrowserRouter([
             path: "/register",
             element: <Register />,
           },
-          {
-            path: "/communicate",
-            element: <CommunicateWithEmployer />,
-          },
+          
         ],
       },
 
