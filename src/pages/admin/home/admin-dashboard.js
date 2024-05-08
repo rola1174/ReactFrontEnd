@@ -143,11 +143,9 @@ export const AdminDashboard = () => {
                                             </Link>
                                           </li>
                                           <li className="list-inline-item">
-                                            <a href="#" className="px-2 text-primary">
-                                              <Link to={`/update-employer/${user.employerId}`} className="px-2 text-primary">
-                                                <BsPencil style={{ color: "blue" }} />
-                                              </Link>
-                                            </a>
+                                            <Link to={`/update-employer/${user.employerId}`} className="px-2 text-primary">
+                                              <BsPencil style={{ color: "blue" }} />
+                                            </Link>
                                           </li>
                                           <li className="list-inline-item">
                                             <a

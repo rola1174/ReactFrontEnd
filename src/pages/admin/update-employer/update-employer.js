@@ -43,11 +43,11 @@ export const UpdateEmployer = () => {
       })
       .then((response) => {
         setSpecificUser({ ...specificUser, result: response.data, loading: false, err: null });
-        setUsername(response.username);
-        setEmail(response.email);
-        setCompanyName(response.campanyName);
-        setCampanyDescription(response.campanyDescription);
-        setMainAdress(response.mainaddress);
+        setUsername(response.data.username);
+        setEmail(response.data.email);
+        setCompanyName(response.data.company_name);
+        setCampanyDescription(response.data.company_description);
+        setMainAdress(response.data.mainaddress);
       })
       .catch((error) => {
         setSpecificUser({
@@ -145,6 +145,7 @@ export const UpdateEmployer = () => {
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="email">Email address</label>
                       <input className="form-control" type="email" id="email" value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         ref={(val) => {
                           form.current.email = val;
                         }}
@@ -152,8 +153,8 @@ export const UpdateEmployer = () => {
                     </div>
 
                     <div className="mb-3">
-                      <label className="small mb-1" htmlFor="email">New Password</label>
-                      <input className="form-control" type="password" id="email"
+                      <label className="small mb-1" htmlFor="password">New Password</label>
+                      <input className="form-control" type="password" id="password"
                         ref={(val) => {
                           form.current.password = val;
                         }}
@@ -162,7 +163,8 @@ export const UpdateEmployer = () => {
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_name">Company_name</label>
-                      <input className="form-control" type="text" id="Company_name" value={specificUser.result.Company_name}
+                      <input className="form-control" type="text" id="Company_name" value={campanyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
                         ref={(val) => {
                           form.current.company_name = val;
                         }}
@@ -171,7 +173,8 @@ export const UpdateEmployer = () => {
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_description">Company_description</label>
-                      <input className="form-control" type="text" id="Company_description" value={specificUser.result.Company_description}
+                      <input className="form-control" type="text" id="Company_description" value={campanyDescription}
+                        onChange={(e) => setCampanyDescription(e.target.value)}
                         ref={(val) => {
                           form.current.company_description = val;
                         }}
@@ -180,13 +183,14 @@ export const UpdateEmployer = () => {
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Mainaddress">Mainaddress</label>
-                      <input className="form-control" type="text" id="Mainaddress" value={specificUser.result.Mainaddress}
+                      <input className="form-control" type="text" id="Mainaddress" value={mainaddress}
+                        onChange={(e) => setMainAdress(e.target.value)}
                         ref={(val) => {
                           form.current.mainaddress = val;
                         }}
                         required />
                     </div>
-                    <button className="btn btn-primary" type="submit">{specificUser.loading ? "Creating..." : "Create Employer"}</button>
+                    <button className="btn btn-primary" type="submit">{specificUser.loading ? "Updating..." : "Update Employer"}</button>
                   </form>
                 </div>
               </div>
