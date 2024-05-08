@@ -117,10 +117,19 @@
   letter-spacing: 1px;
 }
 
-.reject-btn {
-  background-color: #FF6347; /* Adjust color as needed */
-  margin-right: 10px;
+.split-buttons {
+  display: flex;
 }
+
+.split-buttons button {
+  flex: 1;
+}
+
+.split-buttons button.reject-btn {
+  background-color: #FF6347; /* Adjust color as needed */
+  margin-left: 10px;
+}
+
 
 .star-save {
   position: absolute;
