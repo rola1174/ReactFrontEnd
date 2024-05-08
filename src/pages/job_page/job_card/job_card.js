@@ -42,22 +42,21 @@ export const JobCard = (props) => {
             <h6>Job type</h6>
             <h2>Job Title</h2>
           </div>
-          {user && user.role === "admin" ? (
-            <>
-              <AcceptJob jobId={props.id} />
-              <RejectJob jobId={props.id} />
-            </>
+          {user && user.role === "Employer" ? (
+            <div className="admin-actions">
+              <div className="split-buttons">
+                <AcceptJob jobId={props.id} />
+                <RejectJob jobId={props.id} />
+              </div>
+              <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
+                {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
+              </div>
+            </div>
           ) : (
             <>
-              {savedJob ? (
-                <div className="star-save" onClick={() => handleSaveClick(false)}>
-                  <FaStar key={props.id} color="orange" />
-                </div>
-              ) : (
-                <div className="star-save" onClick={() => handleSaveClick(true)}>
-                  <FaRegStar key={props.id} />
-                </div>
-              )}
+              <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
+                {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
+              </div>
               <button className="btn" onClick={handleApplyClick}>Apply</button>
             </>
           )}
