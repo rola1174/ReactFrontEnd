@@ -1,4 +1,3 @@
-// job_page.js
 import React from "react";
 import { JobCard } from "./job_card/job_card"; // Note: Corrected component name to start with uppercase
 import { data } from '../../services/job';
