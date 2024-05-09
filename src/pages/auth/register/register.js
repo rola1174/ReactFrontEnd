@@ -81,12 +81,7 @@ export const Register = () => {
       {register.loading === true ? (
         loadingSpinner()
       ) : (
-        <div className="container h-100">
-          <div className="row h-100 justify-content-center align-items-center">
-            <div className="col-xl-12">
-              <div className="card mb-4">
-                <header className="card-header text-center">Register</header>
-                <div className="card-body">
+       
                   <form onSubmit={(e) => submit(e)}>
                     <div className="row gx-3 mb-3">
                       <div className="col-md-6">
@@ -200,13 +195,8 @@ export const Register = () => {
                         required
                       />
                     </div>
-                    <button className="btn btn-primary" type="submit">Register</button>
+                    <button className="register-btn" type="submit">register</button>
                   </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       )}
     </>
   );
