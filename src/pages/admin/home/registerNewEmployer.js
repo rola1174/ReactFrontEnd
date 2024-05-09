@@ -95,6 +95,7 @@ export const CreateEmployer = () => {
                         ref={(val) => {
                           form.current.username = val;
                         }}
+                        placeholder="Enter UserName"
                         required
                       />
                     </div>
@@ -103,56 +104,80 @@ export const CreateEmployer = () => {
                         <label className="small mb-1" htmlFor="password">
                           password
                         </label>
-                        <input className="form-control" type="text" id="password"
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="password"
                           ref={(val) => {
                             form.current.password = val;
                           }}
-                          required />
-
+                          placeholder="Enter password"
+                          required
+                        />
                       </div>
                     </div>
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="email">
                         Email address
                       </label>
-                      <input className="form-control" type="email" id="email"
+                      <input
+                        className="form-control"
+                        type="email"
+                        id="email"
                         ref={(val) => {
                           form.current.email = val;
                         }}
-                        required />
+                        placeholder="Enter Email address"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_name">
                         Company_name
                       </label>
-                      <input className="form-control" type="text" id="Company_name"
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Company_name"
                         ref={(val) => {
                           form.current.company_name = val;
                         }}
-                        required />
+                        placeholder="Enter The Company_name"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_description">
                         Company_description
                       </label>
-                      <input className="form-control" type="text" id="Company_description"
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Company_description"
                         ref={(val) => {
                           form.current.company_description = val;
                         }}
-                        required />
+                        placeholder="Enter The Company_description"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Mainaddress">
                         Mainaddress
                       </label>
-                      <input className="form-control" type="text" id="Mainaddress"
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Mainaddress"
                         ref={(val) => {
                           form.current.mainaddress = val;
                         }}
-                        required />
+                        placeholder="Enter The Mainaddress"
+                        required
+                      />
                     </div>
                     <button type="submit">{createEmployer.loading ? "Creating..." : "Create Employer"}</button>
                   </form>
@@ -165,4 +190,5 @@ export const CreateEmployer = () => {
     </>
   );
 };
+
 export default CreateEmployer;

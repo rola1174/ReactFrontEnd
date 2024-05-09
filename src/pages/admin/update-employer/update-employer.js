@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
+import "./update-employer.css";
 
 export const UpdateEmployer = () => {
   const { id } = useParams();
@@ -9,9 +10,9 @@ export const UpdateEmployer = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [campanyName, setCompanyName] = useState("");
-  const [campanyDescription, setCampanyDescription] = useState("");
-  const [mainaddress, setMainAdress] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyDescription, setCompanyDescription] = useState("");
+  const [mainAddress, setMainAddress] = useState("");
 
   const [specificUser, setSpecificUser] = useState({
     loading: true,
@@ -46,8 +47,8 @@ export const UpdateEmployer = () => {
         setUsername(response.data.username);
         setEmail(response.data.email);
         setCompanyName(response.data.company_name);
-        setCampanyDescription(response.data.company_description);
-        setMainAdress(response.data.mainaddress);
+        setCompanyDescription(response.data.company_description);
+        setMainAddress(response.data.mainaddress);
       })
       .catch((error) => {
         setSpecificUser({
@@ -135,60 +136,95 @@ export const UpdateEmployer = () => {
                   <form onSubmit={(e) => submit(e)}>
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Username">UserName</label>
-                      <input className="form-control" type="text" id="Username" value={username}
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Username"
+                        value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         ref={(val) => {
                           form.current.username = val;
                         }}
-                        required />
+                        placeholder="Enter UserName"
+                        required
+                      />
                     </div>
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="email">Email address</label>
-                      <input className="form-control" type="email" id="email" value={email}
+                      <input
+                        className="form-control"
+                        type="email"
+                        id="email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         ref={(val) => {
                           form.current.email = val;
                         }}
-                        required />
+                        placeholder="Enter Email address"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="password">New Password</label>
-                      <input className="form-control" type="password" id="password"
+                      <input
+                        className="form-control"
+                        type="password"
+                        id="password"
                         ref={(val) => {
                           form.current.password = val;
                         }}
-                        required />
+                        placeholder="Enter New Password"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_name">Company_name</label>
-                      <input className="form-control" type="text" id="Company_name" value={campanyName}
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Company_name"
+                        value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         ref={(val) => {
                           form.current.company_name = val;
                         }}
-                        required />
+                        placeholder="Enter The Company_name"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Company_description">Company_description</label>
-                      <input className="form-control" type="text" id="Company_description" value={campanyDescription}
-                        onChange={(e) => setCampanyDescription(e.target.value)}
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Company_description"
+                        value={companyDescription}
+                        onChange={(e) => setCompanyDescription(e.target.value)}
                         ref={(val) => {
                           form.current.company_description = val;
                         }}
-                        required />
+                        placeholder="Enter The Company_description"
+                        required
+                      />
                     </div>
 
                     <div className="mb-3">
                       <label className="small mb-1" htmlFor="Mainaddress">Mainaddress</label>
-                      <input className="form-control" type="text" id="Mainaddress" value={mainaddress}
-                        onChange={(e) => setMainAdress(e.target.value)}
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="Mainaddress"
+                        value={mainAddress}
+                        onChange={(e) => setMainAddress(e.target.value)}
                         ref={(val) => {
                           form.current.mainaddress = val;
                         }}
-                        required />
+                        placeholder="Enter The Mainaddress"
+                        required
+                      />
                     </div>
                     <button className="btn btn-primary" type="submit">{specificUser.loading ? "Updating..." : "Update Employer"}</button>
                   </form>
