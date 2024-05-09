@@ -1,6 +1,7 @@
-import {  useRef, useState } from "react";
 import axios from "axios";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import "./register.css";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ export const Register = () => {
           <div className="row h-100 justify-content-center align-items-center">
             <div className="col-xl-12">
               <div className="card mb-4">
-                <div className="card-header">Register as Job Seeker</div>
+                <header className="card-header text-center">Register</header>
                 <div className="card-body">
                   <form onSubmit={(e) => submit(e)}>
                     <div className="row gx-3 mb-3">
@@ -94,6 +95,7 @@ export const Register = () => {
                           className="form-control"
                           type="text"
                           id="firstName"
+                          placeholder="Enter First Name"
                           ref={(val) => {
                             form.current.firstName = val;
                           }}
@@ -106,6 +108,7 @@ export const Register = () => {
                           className="form-control"
                           type="text"
                           id="lastName"
+                          placeholder="Enter Last Name"
                           ref={(val) => {
                             form.current.lastName = val;
                           }}
@@ -119,6 +122,7 @@ export const Register = () => {
                         className="form-control"
                         type="email"
                         id="email"
+                        placeholder="Enter Email"
                         ref={(val) => {
                           form.current.email = val;
                         }}
@@ -131,6 +135,7 @@ export const Register = () => {
                         className="form-control"
                         type="password"
                         id="password"
+                        placeholder="Enter Password"
                         ref={(val) => {
                           form.current.password = val;
                         }}
@@ -175,6 +180,7 @@ export const Register = () => {
                         className="form-control"
                         type="tel"
                         id="phone"
+                        placeholder="Enter Phone Number"
                         ref={(val) => {
                           form.current.phone = val;
                         }}
@@ -187,6 +193,7 @@ export const Register = () => {
                         className="form-control"
                         type="text"
                         id="username"
+                        placeholder="Enter Username"
                         ref={(val) => {
                           form.current.username = val;
                         }}
