@@ -18,21 +18,21 @@ export const JobPage = () => {
     });
 
     useEffect(() => {
-        // (token && user.role === "Employer") ? (
-        axios
-            .get(`https://localhost:7163/api/Admin/GetAllJobs`, {
-                // headers: {
-                //   Authorization: `Bearer ${token}`,
-                // },
-            })
-            // ) : (
-            //     axios
-            //         .get(`https://localhost:7163/api/JobSeeker/Getalljobs`, {
-            //             // headers: {
-            //             //   Authorization: `Bearer ${token}`,
-            //             // },
-            //         })
-            // )
+        token && user.role === "Employer" ? (
+            axios
+                .get(`https://localhost:7163/api/Admin/GetAllJobs`, {
+                    // headers: {
+                    //   Authorization: `Bearer ${token}`,
+                    // },
+                })
+        ) : (
+            axios
+                .get(`https://localhost:7163/api/JobSeeker/Getalljobs`, {
+                    // headers: {
+                    //   Authorization: `Bearer ${token}`,
+                    // },
+                })
+        )
             .then((response) => {
                 setJob({ ...job, result: response.data, loading: false, err: null });
             })
@@ -49,10 +49,14 @@ export const JobPage = () => {
         <div className="d-flex flex-wrap justify-content-between">
             {job.result.map((job, index) => (
                 <JobCard
-                    cardKey={index + 1}
-                    // jobId={job.result.id}
+                    Key={index + 1}
+                    id={job.jobId}
+                    jobDecription={job.job_description}
                     jobTitle={job.job_title}
                     industry={job.industry}
+                    salary={job.salary_budget}
+                    noOfProposalSubmited={job.no_of_proposal_submitted}
+                    noOfPositionsRequired={job.no_of_position_required}
                     jobPostCreationDate={job.post_creation_date}
                     employerName={job.employerName}
                     jobType={job.job_type}

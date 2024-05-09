@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import "./ApplyForm.css";
 
 export const ApplyForm = (id) => {
   const [applyForm, setApplyForm] = useState({
-    loading: true,
+    loading: false,
     result: {},
     err: null,
   });
@@ -38,16 +38,16 @@ export const ApplyForm = (id) => {
       });
   };
 
-  useEffect(() => {
-    axios
-      .get("https://localhost:7163/api/job-seeker/apply-form")
-      .then((data) => {
-        setApplyForm({ ...applyForm, result: data.data, loading: false, err: null });
-      })
-      .catch((err) => {
-        setApplyForm({ ...applyForm, loading: false, err: [{ msg: `something went wrong ${err}` }] });
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://localhost:7163/api/job-seeker/apply-form")
+  //     .then((data) => {
+  //       setApplyForm({ ...applyForm, result: data.data, loading: false, err: null });
+  //     })
+  //     .catch((err) => {
+  //       setApplyForm({ ...applyForm, loading: false, err: [{ msg: `something went wrong ${err}` }] });
+  //     });
+  // }, []);
 
   const loadingSpinner = () => {
     return (
@@ -83,101 +83,99 @@ export const ApplyForm = (id) => {
       {applyForm.loading === true ? (
         loadingSpinner()
       ) : (
-        <div className="container h-100">
-          <div className="row h-100 justify-content-center align-items-center">
-            <div className="col-xl-12">
-              <div className="card mb-4">
-                <div className="card-header"> Apply for job</div>
-                <div className="card-body">
-                  <form onSubmit={(e) => submit(e)}>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Name">
-                          Name
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="Name"
-                          ref={(val) => {
-                            form.current.Name = val;
-                          }}
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Email">
-                          Email
-                        </label>
-                        <input
-                          className="form-control"
-                          type="email"
-                          id="Email"
-                          ref={(val) => {
-                            form.current.Email = val;
-                          }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Phone">
-                          Phone
-                        </label>
-                        <input
-                          className="form-control"
-                          type="tel"
-                          id="Phone"
-                          ref={(val) => {
-                            form.current.Phone = val;
-                          }}
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="cvFile">
-                          CV File
-                        </label>
-                        <input
-                          className="form-control"
-                          type="file"
-                          id="cvFile"
-                          ref={(val) => {
-                            form.current.cvFile = val;
-                          }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-12">
-                        <label className="small mb-1" htmlFor="Message">
-                          Message
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="Message"
-                          rows="4"
-                          ref={(val) => {
-                            form.current.Message = val;
-                          }}
-                          required
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-12">
-                        <button type="submit" className="btn btn-primary">
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+        <div className="overlay">
+          <form onSubmit={(e) => submit(e)}>
+            <header className="head-form">
+              <h2>Apply For Job</h2>
+              <p>Enter your informantion to apply for job</p>
+            </header>
+            <div className="con">
+              <div className="row gx-3 mb-3">
+                <div className="col-md-6">
+                  <label className="small mb-1" htmlFor="Name">
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="Name"
+                    ref={(val) => {
+                      form.current.Name = val;
+                    }}
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="small mb-1" htmlFor="Email">
+                    Email
+                  </label>
+                  <input
+                    className="form-control"
+                    type="email"
+                    id="Email"
+                    ref={(val) => {
+                      form.current.Email = val;
+                    }}
+                    required
+                  />
                 </div>
               </div>
+              <div className="row gx-3 mb-3">
+                <div className="col-md-6">
+                  <label className="small mb-1" htmlFor="Phone">
+                    Phone
+                  </label>
+                  <input
+                    className="form-control"
+                    type="tel"
+                    id="Phone"
+                    ref={(val) => {
+                      form.current.Phone = val;
+                    }}
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="small mb-1" htmlFor="cvFile">
+                    CV File
+                  </label>
+                  <input
+                    className="form-control"
+                    type="file"
+                    id="cvFile"
+                    ref={(val) => {
+                      form.current.cvFile = val;
+                    }}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row gx-3 mb-3">
+                <div className="col-md-12">
+                  <label className="small mb-1" htmlFor="Message">
+                    Message
+                  </label>
+                  <textarea
+                    className="form-control"
+                    id="Message"
+                    rows="4"
+                    ref={(val) => {
+                      form.current.Message = val;
+                    }}
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <br />
+              <div className="row gx-3 mb-3">
+                {/* <div className="col-md-12"> */}
+                <button type="submit" className="apply-btn">
+                  Submit
+                </button>
+                {/* </div> */}
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>

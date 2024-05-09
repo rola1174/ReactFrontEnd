@@ -12,7 +12,7 @@ import { ShowEmployer } from "./pages/admin/show-employer/show-employer";
 import { AdminDashboard } from "./pages/admin/home/admin-dashboard";
 import { ApplyForm } from "./pages/job-seeker/ApplyForm";
 import { JobPostForm } from "./pages/employer/JobPostForm";
-import  EmployerDashboard  from "./pages/employer/employer-dashboard";
+import EmployerDashboard from "./pages/employer/employer-dashboard";
 import ChatApp from "./pages/communication/com";
 import CreateEmployer from "./pages/admin/home/registerNewEmployer";
 import AcceptJob from "./pages/admin/home/accept-jobPost/accept-jobPost";
@@ -44,7 +44,7 @@ export const routes = createBrowserRouter([
             path: "/register",
             element: <Register />,
           },
-          
+
         ],
       },
 
@@ -70,7 +70,7 @@ export const routes = createBrowserRouter([
             element: <CreateEmployer />,
           },
           {
-            path:"/accept-jobPost",
+            path: "/accept-jobPost",
             element: <AcceptJob />,
           },
           {
@@ -82,8 +82,8 @@ export const routes = createBrowserRouter([
       },
 
       {
-        //element: <AuthGuard roles={["Employer"]} />,
-        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
+        element: <AuthGuard roles={["Employer"]} />,
+        //element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
           {
             path: "/employer",
@@ -103,14 +103,14 @@ export const routes = createBrowserRouter([
             path: "/employer/rejectProposals",
             element: < RejectProposals />,
           },
-          
+
 
         ],
       },
       {
         // Guard
-        //element: <AuthGuard roles={["Job Seeker"]} />,
-        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
+        element: <AuthGuard roles={["Job Seeker"]} />,
+        //element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
           {
             path: "/apply/:id",

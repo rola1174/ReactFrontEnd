@@ -28,14 +28,14 @@ export const AppHeader = () => {
             </li>
           )}
 
-          {user && user.role === "job-seeker" && (
+          {user && user.role === "Job Seeker" && (
             <li className="nav-item">
               <Link to={"/job-seeker"} className="nav-link">
                 Home
               </Link>
             </li>
           )}
-          {user && user.role === "employer" && (
+          {user && user.role === "Employer" && (
             <>
               {/* {/* <li className="nav-item">
                 <Link to={"/employer"} className="nav-link">
@@ -43,7 +43,7 @@ export const AppHeader = () => {
                 </Link> 
               </li> */}
               <li className="nav-item">
-                <Link to={"/create-job"} className="nav-link">
+                <Link to={"/employer/create-job"} className="nav-link">
                   Create Job Post
                 </Link>
               </li>
@@ -76,6 +76,13 @@ export const AppHeader = () => {
                   Register
                 </Link>
               </li>
+
+
+              {/* <li className="nav-item">
+                <Link to={"/employer/create-job"} className="nav-link">
+                  create job post
+                </Link>
+              </li> */}
             </>
           )}
 
