@@ -1,4 +1,4 @@
-import React, { useRef,  useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 
 export const JobPostForm = () => {
@@ -24,7 +24,7 @@ export const JobPostForm = () => {
         e.preventDefault();
         setJobPost({ ...jobPost, loading: true });
         axios
-            .post("https://localhost:7163/api/CreateJobPost", {
+            .post("https://localhost:7163/api/Employer/CreateJobPost", {
                 job_title: form.current.job_title.value,
                 job_description: form.current.job_description.value,
                 job_type: form.current.job_type.value,
@@ -32,7 +32,7 @@ export const JobPostForm = () => {
                 industry: form.current.industry.value,
                 salary_budget: form.current.salary_budget.value,
                 no_of_proposal_required: form.current.no_of_proposal_required.value,
-                empid: 11,
+                empid: 1,
             })
             .then((response) => {
                 setJobPost({ ...jobPost, loading: false, result: response.data });

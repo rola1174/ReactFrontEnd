@@ -41,11 +41,21 @@ export const JobCard = (props) => {
             <h6>Job type</h6>
             <h2>Job Title</h2>
           </div>
+<<<<<<< HEAD
           {token && user && user.role === "Employer" ? (
             <>
               <AcceptJob jobId={props.id} />
               <RejectJob jobId={props.id} onJobRejected={() => handleSaveClick(false)} />
             </>
+=======
+          {user && user.role === "Employer" ? (
+            <div className="admin-actions">
+              <div className="split-buttons">
+                <AcceptJob jobId={props.id} />
+                <RejectJob jobId={props.id} />
+              </div>
+            </div>
+>>>>>>> 2cca1cb68f81deffca368f44588ef8fc3b422ee9
           ) : (
             <>
               <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
