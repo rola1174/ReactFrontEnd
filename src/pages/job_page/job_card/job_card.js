@@ -41,7 +41,7 @@ export const JobCard = (props) => {
             <h6>Job type</h6>
             <h2>Job Title</h2>
           </div>
-          {token && user && user.role === "employer" ? (
+          {token && user && user.role === "Employer" ? (
             <>
               <AcceptJob jobId={props.id} />
               <RejectJob jobId={props.id} onJobRejected={() => handleSaveClick(false)} />
@@ -51,7 +51,7 @@ export const JobCard = (props) => {
               <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
                 {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
               </div>
-              <button className="btn" onClick={handleApplyClick}>Apply</button>
+              <button className="btn-Apply" onClick={handleApplyClick}>Apply</button>
             </>
           )}
         </div>
