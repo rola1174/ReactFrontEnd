@@ -12,11 +12,13 @@ import { ShowEmployer } from "./pages/admin/show-employer/show-employer";
 import { AdminDashboard } from "./pages/admin/home/admin-dashboard";
 import { ApplyForm } from "./pages/job-seeker/ApplyForm";
 import { JobPostForm } from "./pages/employer/JobPostForm";
-import { EmployerDashboard } from "./pages/employer/employer-dashboard";
+import  EmployerDashboard  from "./pages/employer/employer-dashboard";
 import ChatApp from "./pages/communication/com";
 import CreateEmployer from "./pages/admin/home/registerNewEmployer";
 import AcceptJob from "./pages/admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "./pages/admin/home/reject-jobPost/reject-jobPost";
+import AcceptProposals from "./pages/employer/acceptProposals";
+import RejectProposals from "./pages/employer/rejectProposals";
 export const routes = createBrowserRouter([
   {
     path: "", //localhost:3000
@@ -91,6 +93,18 @@ export const routes = createBrowserRouter([
             path: "/employer/create-job",
             element: < JobPostForm />,
           },
+
+          {
+            path: "/employer/acceptProposals",
+            element: < AcceptProposals />,
+          },
+
+          {
+            path: "/employer/rejectProposals",
+            element: < RejectProposals />,
+          },
+          
+
         ],
       },
       {
