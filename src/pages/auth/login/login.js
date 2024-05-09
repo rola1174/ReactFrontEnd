@@ -4,11 +4,17 @@ import axios from "axios";
 import jwt from "jwt-decode";
 import { setAuthToken } from "../../../services/auth";
 import { FaRegUserCircle, FaKey, FaUserPlus, FaEye } from "react-icons/fa";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./login.css";
+import { Register } from "../register/register";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [showRegisterForm, setShowRegisterForm] = useState(false); 
+  const handleRegisterClick = () => {
+    setShowRegisterForm(true); 
+  };
+
 
   const [login, setLogin] = useState({
     loading: false,
@@ -120,7 +126,7 @@ export const Login = () => {
             </div>
             <div className="other">
               <button className="frgt-pass">Forgot Password</button>
-              <button className="sign-up-btn">
+              <button onClick={handleRegisterClick} className="sign-up-btn"> {/* Call handleRegisterClick when Sign Up button is clicked */}
                 Sign Up <FaUserPlus></FaUserPlus>
                 {/* Sign Up <i className="fa fa-user-plus" aria-hidden="true"></i> */}
               </button>
@@ -137,12 +143,10 @@ export const Login = () => {
       {login.loading === true ? (
         loadingSpinner()
       ) : (
-        <LoginForm onSubmit={submit} />
+        showRegisterForm ? <Register /> : <LoginForm onSubmit={submit} />
       )}
     </>
   );
 };
 
 export default Login;
-
-
