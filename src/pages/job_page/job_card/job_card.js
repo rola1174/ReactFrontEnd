@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import "./job_card.css";
 import AcceptJob from "../../admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "../../admin/home/reject-jobPost/reject-jobPost";
 import { getAuthToken } from "../../../services/auth";
-import "./job_card.css";
-// import { ApplyForm } from "../../job-seeker/apply-form";
 
 export const JobCard = (props) => {
   const navigate = useNavigate();
   const [savedJob, setSavedJob] = useState(false);
-  const { user } = getAuthToken();
+  const { token, user } = getAuthToken();
 
   const handleCardClick = () => {
     navigate(`/details/${props.id}`);
@@ -42,16 +41,11 @@ export const JobCard = (props) => {
             <h6>Job type</h6>
             <h2>Job Title</h2>
           </div>
-          {user && user.role === "Employer" ? (
-            <div className="admin-actions">
-              <div className="split-buttons">
-                <AcceptJob jobId={props.id} />
-                <RejectJob jobId={props.id} />
-              </div>
-              <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>
-                {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
-              </div>
-            </div>
+          {token && user && user.role === "Employer" ? (
+            <>
+              <AcceptJob jobId={props.id} />
+              <RejectJob jobId={props.id} onJobRejected={() => handleSaveClick(false)} />
+            </>
           ) : (
             <>
               <div className="star-save" onClick={() => handleSaveClick(savedJob ? false : true)}>

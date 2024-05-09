@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import axios from "axios";
 import { getAuthToken } from "../../../../services/auth";
 
@@ -32,6 +32,34 @@ const RejectJob = ({ jobId, handleReject }) => {
     <button className="btn reject-btn" onClick={handleRejectClick}>
       Reject
     </button>
+  );
+};
+
+export default RejectJob;*/
+
+
+
+import React from "react";
+import axios from "axios";
+
+const RejectJob = (props) => {
+  const handleReject = () => {
+    // Send a request to reject the job post
+    axios
+      .delete(`https://localhost:7163/api/Admin/refuse-job/${props.jobId}`)
+      .then((response) => {
+        console.log("Job rejected successfully");
+        props.onJobRejected(props.jobId);
+      })
+      .catch((error) => {
+        console.error("Error rejecting job:", error);
+      });
+  };
+
+
+
+  return (
+    <button  onClick= {handleReject}>Reject Job</button>
   );
 };
 
