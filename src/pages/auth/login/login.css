@@ -1,29 +1,3 @@
-/*.h-100 {
-    height: 83vh !important;
-}
-
-.card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-}
-
-.card .card-header {
-    font-weight: 500;
-}
-
-.card-header:first-child {
-    border-radius: 0.35rem 0.35rem 0 0;
-}
-
-.card-header {
-    padding: 1rem 1.35rem;
-    margin-bottom: 0;
-    background-color: rgba(33, 40, 50, 0.03);
-    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-}*/
-
-
-
-
 @import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
 
 /* Global rules */
@@ -33,11 +7,11 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
     font-family: 'Abel', sans-serif;
     opacity: .95;
-}
+} */
 
 .overlay {
     display: flex;
@@ -122,10 +96,11 @@ input:focus {
 button {
     display: inline-block;
     color: #252537;
-    width: 100%;
-    height: 50px; /* تم تغيير ارتفاع الزر هنا */
+    height: 50px;
+    /* تم تغيير ارتفاع الزر هنا */
     padding: 0 20px;
-    background: #B8F2E6; /* تم تغيير لون الزر هنا */
+    background: #B8F2E6;
+    /* تم تغيير لون الزر هنا */
     border-radius: 5px;
     outline: none;
     border: none;
@@ -143,11 +118,17 @@ button {
 }
 
 .log-in {
-    background: #B8F2E6;
+    background: #ffffff;
+    width: 100%;
 }
 
 .frgt-pass {
     background: transparent;
+}
+
+.sign-up-btn {
+    background: #B8F2E6;
+    display: inline;
 }
 
 .button-container {
@@ -168,6 +149,7 @@ button:hover {
     0% {
         transform: translateY(3px);
     }
+
     100% {
         transform: translateY(5px);
     }

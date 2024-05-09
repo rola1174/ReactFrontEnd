@@ -2,6 +2,7 @@ import React from "react";
 import image from "../../assets/images/logo512.png";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuthToken, removeAuthToken } from "../../services/auth";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const AppHeader = () => {
   const { token, user } = getAuthToken();
@@ -26,7 +27,7 @@ export const AppHeader = () => {
               </Link>
             </li>
           )}
-          
+
           {user && user.role === "job-seeker" && (
             <li className="nav-item">
               <Link to={"/job-seeker"} className="nav-link">
@@ -77,9 +78,9 @@ export const AppHeader = () => {
               </li>
             </>
           )}
-          
-          
-            
+
+
+
           {token && user && user.role === "employer" && (
             <li className="nav-item">
               <Link to={"employer/create-job"} className="nav-link">

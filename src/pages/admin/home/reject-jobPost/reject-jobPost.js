@@ -46,7 +46,7 @@ const RejectJob = (props) => {
   const handleReject = () => {
     // Send a request to reject the job post
     axios
-      .delete(`https://localhost:7163/api/Admin/refuse-job/${props.jobId}`)
+      .post(`https://localhost:7163/api/Admin/refuse-job/${props.jobId}`)
       .then((response) => {
         console.log("Job rejected successfully");
         props.onJobRejected(props.jobId);
@@ -59,7 +59,7 @@ const RejectJob = (props) => {
 
 
   return (
-    <button  onClick= {handleReject}>Reject Job</button>
+    <button onClick={handleReject}>Reject Job</button>
   );
 };
 
