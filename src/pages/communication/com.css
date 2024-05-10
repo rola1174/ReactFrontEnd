@@ -222,9 +222,4 @@
       background-color: #7773aa;
   }
 
-  .form-control {
-      background-color: hsl(240, 10%, 94%);
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-      color: #1c1a1a;
-
-  }
+  
