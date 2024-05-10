@@ -10,12 +10,12 @@ const AcceptJob = (props) => {
 
       })
       .catch((error) => {
-        console.error("Error accepting job:", error);
+        console.log("Error accepting job:", error);
       });
   };
 
   return (
-    <button  onClick={handleAccept}>Accept Job</button>
+    <button onClick={handleAccept}>Accept Job</button>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
+import { getAuthToken } from "../../services/auth";
 
 export const JobPostForm = () => {
     const [jobPost, setJobPost] = useState({
@@ -8,6 +9,8 @@ export const JobPostForm = () => {
         err: null,
     });
 
+    const { token, user } = getAuthToken();
+
     const form = useRef({
         job_title: "",
         job_description: "",
@@ -15,7 +18,7 @@ export const JobPostForm = () => {
         location: "",
         industry: "",
         salary_budget: "",
-        no_of_proposal_required: "",
+        no_of_position_required: "",
         empid: "",
     });
 
@@ -31,8 +34,8 @@ export const JobPostForm = () => {
                 location: form.current.location.value,
                 industry: form.current.industry.value,
                 salary_budget: form.current.salary_budget.value,
-                no_of_proposal_required: form.current.no_of_proposal_required.value,
-                empid: 1,
+                no_of_position_required: form.current.no_of_position_required.value,
+                empid: user.nameid,
             })
             .then((response) => {
                 setJobPost({ ...jobPost, loading: false, result: response.data });
@@ -119,9 +122,9 @@ export const JobPostForm = () => {
                                                     required
                                                 >
                                                     <option value="">Select job type</option>
-                                                    <option value="High School">Part time</option>
-                                                    <option value="Bachelor Degree">Full Time</option>
-                                                    <option value="Master Degree">Remote</option>
+                                                    <option value="Part time">Part time</option>
+                                                    <option value="Full Time">Full Time</option>
+                                                    <option value="Remote">Remote</option>
                                                 </select>
                                             </div>
 
@@ -182,9 +185,9 @@ export const JobPostForm = () => {
                                             <input
                                                 className="form-control"
                                                 type="number"
-                                                id="no_of_proposal_required"
+                                                id="no_of_position_required"
                                                 ref={(val) => {
-                                                    form.current.no_of_proposal_required = val;
+                                                    form.current.no_of_position_required = val;
                                                 }}
                                                 required
                                             />

@@ -11,7 +11,7 @@ const RejectJob = (props) => {
         props.onJobRejected(props.jobId);
       })
       .catch((error) => {
-        console.error("Error rejecting job:", error);
+        console.log("Error rejecting job:", error);
       });
   };
 

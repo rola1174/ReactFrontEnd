@@ -1,53 +1,52 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
+import { getAuthToken } from "../../services/auth";
+import { useParams } from "react-router-dom";
 import "./ApplyForm.css";
 
-export const ApplyForm = (id) => {
+
+export const ApplyForm = () => {
+  const { user } = getAuthToken();
+  const { id } = useParams();
   const [applyForm, setApplyForm] = useState({
-    loading: true,
+    loading: false,
     result: {},
     err: null,
   });
+
+  const { nameid } = getAuthToken().user;
+
+  const requestData = {
+    jobSeekerId: parseInt(nameid),
+    JobId: id,
+  };
+
   const form = useRef({
-    Name: "",
-    Email: "",
-    Phone: "",
-    Message: "",
-    cvFile: "",
+    brief_description: "",
+    CV_file: null,
   });
 
   const submit = (e) => {
     e.preventDefault();
     setApplyForm({ ...applyForm, loading: true });
 
+    const formData = new FormData();
+    formData.append("jobSeekerId", requestData.jobSeekerId);
+    formData.append("jobId", requestData.JobId);
+    formData.append("brief_description", form.current.brief_description.value);
+    formData.append("CV_file", form.current.CV_file.files[0]);
+
     axios
-      .post(`https://localhost:7163/api/job-seeker/ApplyForm/${id}`, {
-        Name: form.current.Name.value,
-        Email: form.current.Email.value,
-        Phone: form.current.Phone.value,
-        Message: form.current.Message.value,
-        cvFile: form.current.cvFile.value,
-      })
+      .post('https://localhost:7163/api/Proposal/Applyforjob', formData)
+
 
       .then((response) => {
         setApplyForm({ ...applyForm, loading: false, result: response.data });
-
       })
       .catch((error) => {
         setApplyForm({ ...applyForm, loading: false, err: error.response.data });
       });
   };
-
-  useEffect(() => {
-    axios
-      .get("https://localhost:7163/api/job-seeker/apply-form")
-      .then((data) => {
-        setApplyForm({ ...applyForm, result: data.data, loading: false, err: null });
-      })
-      .catch((err) => {
-        setApplyForm({ ...applyForm, loading: false, err: [{ msg: `something went wrong ${err}` }] });
-      });
-  }, []);
 
   const loadingSpinner = () => {
     return (
@@ -83,104 +82,53 @@ export const ApplyForm = (id) => {
       {applyForm.loading === true ? (
         loadingSpinner()
       ) : (
-        <div className="container h-100">
-          <div className="row h-100 justify-content-center align-items-center">
-            <div className="col-xl-12">
-              <div className="card mb-4">
-                <div className="card-header"> Apply for job</div>
-                <div className="card-body">
-                  <form onSubmit={(e) => submit(e)}>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Name">
-                          Name
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="Name"
-                          ref={(val) => {
-                            form.current.Name = val;
-                          }}
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Email">
-                          Email
-                        </label>
-                        <input
-                          className="form-control"
-                          type="email"
-                          id="Email"
-                          ref={(val) => {
-                            form.current.Email = val;
-                          }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="Phone">
-                          Phone
-                        </label>
-                        <input
-                          className="form-control"
-                          type="tel"
-                          id="Phone"
-                          ref={(val) => {
-                            form.current.Phone = val;
-                          }}
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="cvFile">
-                          CV File
-                        </label>
-                        <input
-                          className="form-control"
-                          type="file"
-                          id="cvFile"
-                          ref={(val) => {
-                            form.current.cvFile = val;
-                          }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-12">
-                        <label className="small mb-1" htmlFor="Message">
-                          Message
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="Message"
-                          rows="4"
-                          ref={(val) => {
-                            form.current.Message = val;
-                          }}
-                          required
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-12">
-                        <button type="submit" className="btn btn-primary">
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+        <div className="overlay">
+          <form onSubmit={(e) => submit(e)}>
+            <header className="head-form">
+              <h2>Apply For Job</h2>
+              <p>Enter your information to apply for the job</p>
+            </header>
+            <div className="con">
+              <div className="col-md-6">
+                <label className="small mb-1" htmlFor="CV_file">
+                  CV File
+                </label>
+                <input
+                  className="form-control"
+                  type="file"
+                  id="CV_file"
+                  ref={(val) => {
+                    form.current.CV_file = val;
+                  }}
+                  required
+                />
               </div>
             </div>
-          </div>
+            <div className="row gx-3 mb-3">
+              <div className="col-md-12">
+                <label className="small mb-1" htmlFor="brief_description">
+                  Brief Description
+                </label>
+                <textarea
+                  className="form-control"
+                  id="brief_description"
+                  rows="3"
+                  ref={(val) => {
+                    form.current.brief_description = val;
+                  }}
+
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <div className="row gx-3 mb-3">
+              <button type="submit" className="apply-btn">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </>
   );
 };
-

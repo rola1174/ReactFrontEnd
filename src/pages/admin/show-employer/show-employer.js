@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getAuthToken } from "../../../services/auth";
 import { useParams } from "react-router-dom";
-
 export const ShowEmployer = () => {
   const { id } = useParams();
   const { token, user } = getAuthToken();
