@@ -9,11 +9,14 @@ import { getAuthToken } from "../../../services/auth";
 
 export const JobCard = (props) => {
   const navigate = useNavigate();
+  const { token, user } = getAuthToken();
+
 
   const [savedJob, setSavedJob] = useState(false);
+  // const [ setUnSavedJob] = useState(true);
 
 
-  const { token, user } = getAuthToken();
+
 
   const handleCardClick = () => {
     navigate(`/details/${props}`);
@@ -23,8 +26,7 @@ export const JobCard = (props) => {
     navigate(`/apply/${props.id}`);
   };
 
-
-  const handleSaveClick = () => {  // ToDo: Handle Unsave jobs.
+  const handleSaveClick = (id) => {
     const { nameid } = getAuthToken().user;
     const jobid = props.id;
 
@@ -32,6 +34,7 @@ export const JobCard = (props) => {
       jobSeekerId: parseInt(nameid),
       jobId: jobid
     };
+
     axios
       .post('https://localhost:7163/api/JobSeeker/SaveJob', requestData)
 
@@ -42,7 +45,27 @@ export const JobCard = (props) => {
         setSavedJob(false);
       });
   };
-  console.log("Save button clicked for job ID:", props.id);
+
+  const handleUnSaveClick = () => {
+    if (!savedJob) return;
+    const { nameid } = getAuthToken().user;
+    const jobid = props.id;
+
+    const requestData = {
+      jobSeekerId: parseInt(nameid),
+      jobId: jobid
+    };
+
+    axios
+      .post('https://localhost:7163/api/JobSeeker/UnsavedJob', requestData)
+
+      .then((response) => {
+        setSavedJob(false);
+      })
+      .catch((error) => {
+        setSavedJob(true);
+      });
+  };
 
 
   return (
@@ -62,16 +85,22 @@ export const JobCard = (props) => {
             <h6>{props.jobLocation}</h6>
             <h2>{props.jobTitle}</h2>
           </div>
-          {token && user && user.role === "Employer" ? (
+          {token && user && user.role === "Admin" ? (
             <>
               <AcceptJob jobId={props.id} />
-              <RejectJob jobId={props.id} onJobRejected={() => handleSaveClick(false)} />
+              <RejectJob jobId={props.id} />
             </>
           ) : (
             <>
-              <div className="star-save" onClick={() => handleSaveClick(props.id)}>
-                {savedJob ? <FaStar key={props.id} color="orange" /> : <FaRegStar key={props.id} />}
+              {(savedJob || props.isSaved) ? (<div className="star-save" onClick={handleUnSaveClick}>
+                <FaStar key={props.id} color="orange" />
               </div>
+              ) : (
+                <div className="star-save" onClick={handleSaveClick}>
+                  <FaRegStar key={props.id} />
+                </div>
+              )
+              }
               <button className="btn-Apply" onClick={handleApplyClick}>Apply</button>
             </>
           )}

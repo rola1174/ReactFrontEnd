@@ -17,33 +17,78 @@ export const JobPage = () => {
         err: null,
     });
 
+    const [savedJobs, setSavedJobs] = useState([]);
+    //     loading: true,
+    //     result: [],
+    //     err: null,
+    // });
+
     useEffect(() => {
-        token && user.role === "Employer" ? (
+        if (token && user && user.role === "Admin") {
             axios
-                .get(`https://localhost:7163/api/Admin/GetAllJobs`, {
-                    // headers: {
-                    //   Authorization: `Bearer ${token}`,
-                    // },
+                .get(`https://localhost:7163/api/Admin/GetAllJobs`)
+                .then((response) => {
+                    const jobs = response.data.map((job) => ({
+                        ...job,
+                        isSaved: savedJobs.includes(job.jobId),
+                    }));
+                    setJob({ ...job, result: jobs, loading: false, err: null });
                 })
-        ) : (
-            axios
-                .get(`https://localhost:7163/api/JobSeeker/Getalljobs`, {
-                    // headers: {
-                    //   Authorization: `Bearer ${token}`,
-                    // },
-                })
-        )
-            .then((response) => {
-                setJob({ ...job, result: response.data, loading: false, err: null });
-            })
-            .catch((error) => {
-                setJob({
-                    ...job,
-                    loading: false,
-                    err: [{ msg: `Something went wrong` }],
+                .catch((error) => {
+                    setJob({
+                        ...job,
+                        loading: false,
+                        err: [{ msg: "Something went wrong" }],
+                    });
                 });
-            });
+
+        } else if (token && user && user.role === "Job Seeker") {
+            axios
+                .get(`https://localhost:7163/api/JobSeeker/Getalljobs`,)
+
+                .then((response) => {
+                    const jobs = response.data.map((job) => ({
+                        ...job,
+                        isSaved: savedJobs.includes(job.jobId),
+                    }));
+                    setJob({ ...job, result: jobs, loading: false, err: null });
+                })
+                .catch((error) => {
+                    setJob({
+                        ...job,
+                        loading: false,
+                        err: [{ msg: "Something went wrong" }],
+                    });
+                });
+        }
+    }, [savedJobs, job.update]);
+
+    useEffect(() => {
+        if (token && user && user.role === "Job Seeker") {
+            axios
+                .get(`https://localhost:7163/api/JobSeeker/GetAllSavedJobs/${user.nameid}`, {
+                    // headers: {
+                    //   Authorization: `Bearer ${token}`,
+                    // },
+                })
+                .then((response) => {
+                    setSavedJobs(response.data || []);
+                })
+                .catch((error) => {
+                    setSavedJobs([]);
+                    console.log("fetch the error :", error);
+
+                });
+        }
     }, []);
+
+    const isSaved = (jobId) => {
+        if (savedJobs != []) {
+            return savedJobs.includes(jobId);
+        }
+        return false;
+    };
+
 
     return (
         <div className="d-flex flex-wrap justify-content-between">
@@ -61,10 +106,12 @@ export const JobPage = () => {
                     employerName={job.employerName}
                     jobType={job.job_type}
                     jobLocation={job.location}
-                // isJobSaved = {job.isSaved}
+                    isSaved={isSaved(job.jobId)}
                 // getID={getID}
                 />
             ))}
         </div>
     );
 };
+
+

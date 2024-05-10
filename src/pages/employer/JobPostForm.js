@@ -18,7 +18,7 @@ export const JobPostForm = () => {
         location: "",
         industry: "",
         salary_budget: "",
-        no_of_proposal_required: "",
+        no_of_position_required: "",
         empid: "",
     });
 
@@ -34,7 +34,7 @@ export const JobPostForm = () => {
                 location: form.current.location.value,
                 industry: form.current.industry.value,
                 salary_budget: form.current.salary_budget.value,
-                no_of_proposal_required: form.current.no_of_proposal_required.value,
+                no_of_position_required: form.current.no_of_position_required.value,
                 empid: user.nameid,
             })
             .then((response) => {
@@ -185,9 +185,9 @@ export const JobPostForm = () => {
                                             <input
                                                 className="form-control"
                                                 type="number"
-                                                id="no_of_proposal_required"
+                                                id="no_of_position_required"
                                                 ref={(val) => {
-                                                    form.current.no_of_proposal_required = val;
+                                                    form.current.no_of_position_required = val;
                                                 }}
                                                 required
                                             />

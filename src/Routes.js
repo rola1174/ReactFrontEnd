@@ -17,8 +17,7 @@ import ChatApp from "./pages/communication/com";
 import CreateEmployer from "./pages/admin/home/registerNewEmployer";
 import AcceptJob from "./pages/admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "./pages/admin/home/reject-jobPost/reject-jobPost";
-import AcceptProposals from "./pages/employer/acceptProposals";
-import RejectProposals from "./pages/employer/rejectProposals";
+import JobSeekerDashboard from "./pages/job-seeker/job-seeker-dashboard";
 export const routes = createBrowserRouter([
   {
     path: "", //localhost:3000
@@ -44,14 +43,22 @@ export const routes = createBrowserRouter([
             path: "/register",
             element: <Register />,
           },
+          {
+            path: "/",
+            element: <JobPage />,
+          },
+          {
+            path: "/details/:id",
+            element: <DetailsPage />,
+          },
 
         ],
       },
 
       // Guard for admins
       {
-        //element: <AuthGuard roles={["Admin"]} />,
-        element: <AuthGuard roles={[]} />, // Removing the guards for testing only
+        element: <AuthGuard roles={["Admin"]} />,
+        //element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
           {
             path: "/admin-home", // home page
@@ -94,16 +101,6 @@ export const routes = createBrowserRouter([
             element: < JobPostForm />,
           },
 
-          {
-            path: "/employer/acceptProposals",
-            element: < AcceptProposals />,
-          },
-
-          {
-            path: "/employer/rejectProposals",
-            element: < RejectProposals />,
-          },
-
 
         ],
       },
@@ -112,10 +109,17 @@ export const routes = createBrowserRouter([
         element: <AuthGuard roles={["Job Seeker"]} />,
         //element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
+
+          {
+            path: "/job-seeker",
+            element: <JobSeekerDashboard />,
+          },
+
           {
             path: "/apply/:id",
             element: <ApplyForm />,
           },
+
           /*{
             path: "/job-seeker-dashboard/:jobId", // Add dynamic parameter for jobId
             element: <JobSeekerDashboard />,

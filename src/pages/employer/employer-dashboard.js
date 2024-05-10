@@ -63,7 +63,7 @@ export const EmployerDashboard = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7163/api/Admin/GetAllProposals")
+      .get("https://localhost:7163/api/Employer/Getallsubmittedproposals")
       .then((response) => {
         setProposals({ ...proposals, result: response.data, loading: false, err: null });
       })
@@ -72,11 +72,10 @@ export const EmployerDashboard = () => {
       });
   }, [proposals.update]);
 
-  const acceptProposal = (proposalId) => {
+  const acceptProposal = (JobId, jobSeekerId) => {
     axios
-      .post(`https://localhost:7163/api/employer/acceptProposal/${proposalId}`)
+      .post(`https://localhost:7163/api/Employer/AcceptProposal?jobId=${JobId}&jobSeekerId=${jobSeekerId}`)
       .then((response) => {
-        // Refresh proposals after accepting
         setProposals({ ...proposals, update: !proposals.update });
       })
       .catch((error) => {
@@ -84,9 +83,9 @@ export const EmployerDashboard = () => {
       });
   };
 
-  const rejectProposal = (proposalId) => {
+  const rejectProposal = (JobId, jobSeekerId) => {
     axios
-      .post(`https://localhost:7163/api/employer/rejectProposal/${proposalId}`)
+      .post(`https://localhost:7163/api/Employer/RejectProposal?jobId=${JobId}&jobSeekerId=${jobSeekerId}`)
       .then((response) => {
         // Refresh proposals after rejecting
         setProposals({ ...proposals, update: !proposals.update });
@@ -107,7 +106,7 @@ export const EmployerDashboard = () => {
       </div>
     );
   };
-  
+
   const error = () => {
     return (
       <div className="container">
@@ -149,10 +148,12 @@ export const EmployerDashboard = () => {
                         <table className="table project-list-table table-nowrap align-middle table-borderless">
                           <thead>
                             <tr>
-                              <th scope="col">Job id</th>
-                              <th scope="col">Employer name</th>
+                              <th scope="col">Proposal No.</th>
+                              <th scope="col">Job Id</th>
+                              <th scope="col">Job Seeker Name</th>
                               <th scope="col">CV</th>
-                              <th scope="col">Employer Email</th>
+                              <th scope="col">brief description</th>
+                              <th scope="col">proposal date</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -160,12 +161,14 @@ export const EmployerDashboard = () => {
                               return (
                                 <tr key={index}>
                                   <td>{index + 1}</td>
-                                  <td>{user.id}</td>
-                                  <td>{user.cv}</td>
-                                  <td>{user.email}</td>
+                                  <td>{user.jobId}</td>
+                                  <td>{user.jobSeekerName}</td>
+                                  <td>{user.cV_file}</td>
+                                  <td>{user.brief_description}</td>
+                                  <td>{user.proposal_date}</td>
                                   <td>
-                                    <button onClick={() => acceptProposal(user.proposalId)}>Accept</button>
-                                    <button onClick={() => rejectProposal(user.proposalId)}>Reject</button>
+                                    <button onClick={() => acceptProposal(user.jobId, user.jobSeekerId)}>Accept</button>
+                                    <button onClick={() => rejectProposal(user.jobId, user.jobSeekerId)}>Reject</button>
                                   </td>
                                 </tr>
                               );

@@ -67,6 +67,7 @@ export const UpdateEmployer = () => {
       });
   }, []);
 
+  //To Do: display message email already exists
   const submit = (e) => {
     e.preventDefault();
     setUpdateEmployer({ ...updateEmployer, loading: true });
