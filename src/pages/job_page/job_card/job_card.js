@@ -6,7 +6,7 @@ import AcceptJob from "../../admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "../../admin/home/reject-jobPost/reject-jobPost";
 import { getAuthToken } from "../../../services/auth";
 
-export const JobCard = (props) => {
+ export const JobCard = (props) => {
   const navigate = useNavigate();
 
   const [savedJob, setSavedJob] = useState(false);
