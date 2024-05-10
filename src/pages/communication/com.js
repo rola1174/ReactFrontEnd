@@ -355,57 +355,79 @@ export default ChatApp;*/
 
 
 
-import React, { useState, useRef } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
 
-const MessageContainer = ({ messages }) => {
+
+import React, { useState } from "react";
+import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
+
+const SendMessageForm = ({ sendMessage }) => {
+  const [msg, setMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (msg.trim() !== '') {
+      sendMessage(msg);
+      setMessage('');
+    }
+  };
+
   return (
-    <div className="chat-history">
-      <ul className="m-b-0">
-        {messages.map((msg, index) => (
-          <li key={index}>
-            <div>{msg.msg}</div>
-            <div>{msg.username}</div>
-            <div className="time"> {/* Time goes here */}</div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Form onSubmit={handleSubmit}>
+      <InputGroup className="mb-3">
+        <InputGroup.Text>Chat</InputGroup.Text>
+        <Form.Control
+          onChange={(e) => setMessage(e.target.value)}
+          value={msg}
+          placeholder="Type a message"
+        />
+        <Button variant="primary" type="submit" disabled={!msg}>
+          Send
+        </Button>
+      </InputGroup>
+    </Form>
   );
 };
 
+const MessageContainer = ({ messages }) => (
+  <div>
+    {messages.map((msg, index) => (
+      <table key={index} striped bordered>
+        <tbody>
+          <tr>
+            <td>
+              {msg.msg} - {msg.username}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    ))}
+  </div>
+);
+
 const ChatRoom = ({ messages }) => (
-  <div className="chat">
-    <div className="chat-header clearfix">
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="chat-about">
-            <h6 className="m-b-0">Aiden Chavez</h6>
-            <small>Last seen: 2 hours ago</small>
-          </div>
-        </div>
-        <div className="col-lg-6 hidden-sm text-right">
-          <Button variant="outline-secondary"><i className="fa fa-camera"></i></Button>
-          <Button variant="outline-primary"><i className="fa fa-image"></i></Button>
-          <Button variant="outline-info"><i className="fa fa-cogs"></i></Button>
-          <Button variant="outline-warning"><i className="fa fa-question"></i></Button>
-        </div>
-      </div>
-    </div>
-    <MessageContainer messages={messages} />
-    <div className="chat-message clearfix">
-      {/* Form for sending messages */}
-    </div>
+  <div>
+    <Row className="px-5 py-5">
+      <Col sm={10}>
+        <h2>ChatRoom</h2>
+      </Col>
+    </Row>
+    <Row className="px-5 py-5">
+      <Col sm={12}>
+        <MessageContainer messages={messages} />
+      </Col>
+    </Row>
   </div>
 );
 
 const WaitingRoom = ({ joinChatRoom }) => {
-  const [username, setUsername] = useState("");
-  const [chatroom, setChatroom] = useState("");
+  const [username, setUsername] = useState('');
+  const [chatroom, setChatroom] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    joinChatRoom(username, chatroom);
+    if (username.trim() !== '' && chatroom.trim() !== '') {
+      joinChatRoom(username, chatroom);
+    }
   };
 
   return (
@@ -436,24 +458,15 @@ const WaitingRoom = ({ joinChatRoom }) => {
 
 const Comm = () => {
   const [messages, setMessages] = useState([]);
-  const messageRef = useRef(null);
-
-  const animateMessage = () => {
-    setTimeout(() => {
-      const tick = messageRef.current && messageRef.current.querySelector('.tick');
-      if (tick) {
-        tick.classList.remove('tick-animation');
-      }
-    }, 500);
-  };
 
   const joinChatRoom = (username, chatroom) => {
-    
+    // Implement your logic to join the chatroom here
+    // You can update the state or perform any necessary actions
     console.log("Joining chatroom:", username, chatroom);
   };
 
   return (
-    <div className="container">
+    <div>
       <WaitingRoom joinChatRoom={joinChatRoom} />
       <ChatRoom messages={messages} />
     </div>
