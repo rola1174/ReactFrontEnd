@@ -1,4 +1,25 @@
-body {
+/*.h-100 {
+    height: 83vh !important;
+}
+
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+
+.card .card-header {
+    font-weight: 500;
+}
+
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}*/body {
     background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -33,7 +54,7 @@ header p {
 }
 
 .input-item {
-    background: #fff;
+    background: #fff; 
     color: #333;
     padding: 14.5px 0px 15px 9px;
     border-radius: 5px 0px 0px 5px;
@@ -61,22 +82,22 @@ header p {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #fff; 
 }
 
-.register-btn {
-    /* display: block; */
-    width: 20%;
+.btn-primary {
+    display: block;
+    width: 100%;
     height: 50px;
-    padding: 0 10px;
-    background: #B8F2E6;
-    display: inline;
-    /* border: none;
+    padding: 0 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     border-radius: 5px;
     font-size: 18px;
-    cursor: pointer; */
+    cursor: pointer;
 }
 
-.register-btn:hover {
-    background-color: #85efd3;
+.btn-primary:hover {
+    background-color: #0056b3;
 }

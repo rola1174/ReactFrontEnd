@@ -32,6 +32,10 @@ export const routes = createBrowserRouter([
         element: <DetailsPage />,
       },
       {
+        path: "/",
+        element: <JobSeekerDashboard />,
+      },
+      {
         // Guard
         element: <AuthGuard roles={[]} />,
         children: [
@@ -110,10 +114,10 @@ export const routes = createBrowserRouter([
         //element: <AuthGuard roles={[]} />, // Removing the guards for testing only
         children: [
 
-          {
-            path: "/job-seeker",
-            element: <JobSeekerDashboard />,
-          },
+          // {
+          //   path: "/job-seeker",
+          //   element: <JobSeekerDashboard />,
+          // },
 
           {
             path: "/apply/:id",
