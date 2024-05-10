@@ -1,151 +1,96 @@
-
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect,  useState } from "react";
 import axios from "axios";
-export const JobSeekerDashboard = () => {
+import { getAuthToken } from "../../services/auth";
 
-    const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [searchCriteria, setSearchCriteria] = useState({
-        location: "",
-        industry: "",
-        jobTitle: "",
-        salaryRange: "",
-        date: ""
+export const JobSeekerDashboard = () => {
+    const { token } = getAuthToken();
+    const [searchCriteria, setSearchCriteria] = useState("")
+        // location: "",
+        // industry: "",
+        // jobTitle: "",
+        // salaryRange: "",
+        // date: ""
+    const [jobs, setJobs] = useState({
+        loading: false,
+        data: [],
+        error: null
     });
 
     useEffect(() => {
-        fetchJobs();
-    }, []);
-
-    const fetchJobs = () => {
-        setLoading(true);
-        setError(null);
-
         axios
-            .get("https://localhost:7047/api/JobSeeker/GetAllJobs", {
-                params: searchCriteria
-            })
-            .then((response) => {
-                setJobs(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError("Failed to fetch jobs");
-                setLoading(false);
-            });
-    };
+          .get("https://localhost:7047/api/jobs", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              searchCriteria: searchCriteria,
+            },
+          })
+          .then((resposne) => {
+            setJobs({ ...jobs, result: resposne.data, loading: false, err: null });
+          })
+          .catch((errors) => {
+            setJobs({ ...jobs, loading: false, err: [{ msg: `something went wrong` }] });
+          });
+      }, [searchCriteria, jobs.update]);
 
-    const handleSearch = () => {
-        fetchJobs();
-    };
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setSearchCriteria((prevSearchCriteria) => ({
-            ...prevSearchCriteria,
-            [name]: value
-        }));
-    };
-
-    const renderJobsTable = () => {
-        if (loading) {
-            return <div>Loading...</div>;
-        }
-
-        if (error) {
-            return <div>Error: {error}</div>;
-        }
-
-        if (jobs.length === 0) {
-            return <div>No jobs found.</div>;
-        }
-
+    const loadingSpinner = () => {
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Job Title</th>
-                        <th>Location</th>
-                        <th>Industry</th>
-                        <th>Salary</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {jobs.map((job) => (
-                        <tr key={job.id}>
-                            <td>{job.title}</td>
-                            <td>{job.location}</td>
-                            <td>{job.industry}</td>
-                            <td>{job.salary}</td>
-                            <td>{job.date}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className="container h-100">
+                <div className="row h-100 justify-content-center align-items-center">
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const error = () => {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-12 alert alert-danger" role="alert">
+                        {jobs.error}
+                    </div>
+                </div>
+            </div>
         );
     };
 
     return (
-        <div>
-            <h1>Job Seeker Dashboard</h1>
-            <div>
-                <h2>Search Jobs</h2>
-                <div>
-                    <label>Location: </label>
-                    <input
-                        type="text"
-                        name="location"
-                        value={searchCriteria.location}
-                        onChange={handleInputChange}
-                    />
+        <>
+            {jobs.error && error()}
+            {jobs.loading ? (
+                loadingSpinner()
+            ) : (
+                <div className="container h-100">
+                    <div className="row h-100 justify-content-center align-items-center">
+                        <div className="col-xl-12">
+                            <div className="card mb-4">
+                                <div className="card-header">Job Postings</div>
+                                <div className="card-body" style={{ backgroundColor: "#F8F8F8" }}>
+                                    <div className="row mb-3">
+                                    <label className="small mb-1" htmlFor="name">
+                                   Search (Search by industry  or  location  or  jobTitle  or salaryRange  or date )
+                                  </label>                                   
+                                       <input
+                                            className="form-control"
+                                            type="text"
+                                            id="name"
+                                            value={searchCriteria}
+                                            onChange={(e) => {
+                                                setSearchCriteria(e.target.value);
+                                              }}
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Industry: </label>
-                    <input
-                        type="text"
-                        name="industry"
-                        value={searchCriteria.industry}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label>Job Title: </label>
-                    <input
-                        type="text"
-                        name="jobTitle"
-                        value={searchCriteria.jobTitle}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label>Salary Range: </label>
-                    <input
-                        type="text"
-                        name="salaryRange"
-                        value={searchCriteria.salaryRange}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div>
-                    <label>Date: </label>
-                    <input
-                        type="text"
-                        name="date"
-                        value={searchCriteria.date}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <button onClick={handleSearch}>Search</button>
-            </div>
-            <div>
-                <h2>Job Listings</h2>
-                {renderJobsTable()}
-            </div>
-        </div>
+            )}
+        </>
     );
 };
-
 export default JobSeekerDashboard;

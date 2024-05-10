@@ -32,7 +32,7 @@ export const routes = createBrowserRouter([
         element: <DetailsPage />,
       },
       {
-        path: "/",
+        path: "/job-seeker",
         element: <JobSeekerDashboard />,
       },
       {
