@@ -72,119 +72,115 @@ export const CreateEmployer = () => {
       {createEmployer.loading === true ? (
         loadingSpinner()
       ) : (
-        <div className="container h-100">
-          <div className="row h-100 justify-content-center align-items-center">
-            <div className="col-xl-12">
-              <div className="card mb-4">
-                <div className="card-header"> create new employer</div>
-                <div className="card-body">
-                  {createEmployer.result && Object.keys(createEmployer.result).length > 0 && (
-                    <div className="alert alert-success" role="alert">
-                      Employer created successfully!
-                    </div>
-                  )}
-                  <form onSubmit={(e) => submit(e)}>
-                    <div className="mb-3">
-                      <label className="small mb-1" htmlFor="Username">
-                        UserName
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="Username"
-                        ref={(val) => {
-                          form.current.username = val;
-                        }}
-                        placeholder="Enter UserName"
-                        required
-                      />
-                    </div>
-                    <div className="row gx-3 mb-3">
-                      <div className="col-md-6">
-                        <label className="small mb-1" htmlFor="password">
-                          password
-                        </label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          id="password"
-                          ref={(val) => {
-                            form.current.password = val;
-                          }}
-                          placeholder="Enter password"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label className="small mb-1" htmlFor="email">
-                        Email address
-                      </label>
-                      <input
-                        className="form-control"
-                        type="email"
-                        id="email"
-                        ref={(val) => {
-                          form.current.email = val;
-                        }}
-                        placeholder="Enter Email address"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="small mb-1" htmlFor="Company_name">
-                        Company_name
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="Company_name"
-                        ref={(val) => {
-                          form.current.company_name = val;
-                        }}
-                        placeholder="Enter The Company_name"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="small mb-1" htmlFor="Company_description">
-                        Company_description
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="Company_description"
-                        ref={(val) => {
-                          form.current.company_description = val;
-                        }}
-                        placeholder="Enter The Company_description"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="small mb-1" htmlFor="Mainaddress">
-                        Mainaddress
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="Mainaddress"
-                        ref={(val) => {
-                          form.current.mainaddress = val;
-                        }}
-                        placeholder="Enter The Mainaddress"
-                        required
-                      />
-                    </div>
-                    <button type="submit">{createEmployer.loading ? "Creating..." : "Create Employer"}</button>
-                  </form>
-                </div>
-              </div>
+        <div className="card-body">
+          {createEmployer.result && Object.keys(createEmployer.result).length > 0 && (
+            <div className="alert alert-success" role="alert">
+              Employer created successfully!
             </div>
-          </div>
+          )}
+          <form onSubmit={(e) => submit(e)}>
+            <div className="con">
+              <header className="head-form">
+                <h2>Create New Employer</h2>
+                <p>Fill in the Employer Information</p>
+              </header>
+              <br />
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="Username">
+                  UserName
+                </label> */}
+                <input
+                  className="form-control"
+                  type="text"
+                  id="Username"
+                  ref={(val) => {
+                    form.current.username = val;
+                  }}
+                  placeholder="Enter UserName"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="password">
+                    password
+                  </label> */}
+                <input
+                  className="form-control"
+                  type="text"
+                  id="password"
+                  ref={(val) => {
+                    form.current.password = val;
+                  }}
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="email">
+                  Email address
+                </label> */}
+                <input
+                  className="form-control"
+                  type="email"
+                  id="email"
+                  ref={(val) => {
+                    form.current.email = val;
+                  }}
+                  placeholder="Enter Email address"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="Company_name">
+                  Company_name
+                </label> */}
+                <input
+                  className="form-control"
+                  type="text"
+                  id="Company_name"
+                  ref={(val) => {
+                    form.current.company_name = val;
+                  }}
+                  placeholder="Enter The Company_name"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="Company_description">
+                  Company_description
+                </label> */}
+                <input
+                  className="form-control"
+                  type="text"
+                  id="Company_description"
+                  ref={(val) => {
+                    form.current.company_description = val;
+                  }}
+                  placeholder="Enter The Company_description"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                {/* <label className="small mb-1" htmlFor="Mainaddress">
+                  Mainaddress
+                </label> */}
+                <input
+                  className="form-control"
+                  type="text"
+                  id="Mainaddress"
+                  ref={(val) => {
+                    form.current.mainaddress = val;
+                  }}
+                  placeholder="Enter The Mainaddress"
+                  required
+                />
+              </div>
+              <button type="submit">{createEmployer.loading ? "Creating..." : "Create Employer"}</button>
+            </div>
+          </form>
         </div>
       )}
     </>

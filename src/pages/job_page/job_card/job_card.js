@@ -7,11 +7,11 @@ import AcceptJob from "../../admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "../../admin/home/reject-jobPost/reject-jobPost";
 import { getAuthToken } from "../../../services/auth";
 
- export const JobCard = (props) => {
+export const JobCard = (props) => {
   const navigate = useNavigate();
   const { token, user } = getAuthToken();
 
-
+  const [isJobAccepted, setIsJobAccepted] = useState(false);
   const [savedJob, setSavedJob] = useState(false);
   // const [ setUnSavedJob] = useState(true);
 
@@ -19,7 +19,7 @@ import { getAuthToken } from "../../../services/auth";
 
 
   const handleCardClick = () => {
-    navigate(`/details/${props}`);
+    navigate(`/details/${props.id}`);
   };
 
   const handleApplyClick = () => {
@@ -86,10 +86,15 @@ import { getAuthToken } from "../../../services/auth";
             <h2>{props.jobTitle}</h2>
           </div>
           {token && user && user.role === "Admin" ? (
-            <>
-              <AcceptJob jobId={props.id} />
-              <RejectJob jobId={props.id} />
-            </>
+            (isJobAccepted || props.jobAccepted) ? (
+              <h4 className="jobAccepted">Job is accepted</h4>
+            ) : (
+              <>
+                <AcceptJob jobId={props.id} onClick={() => setIsJobAccepted(true)} />
+                <RejectJob jobId={props.id} />
+              </>
+            )
+
           ) : (
             <>
               {(savedJob || props.isSaved) ? (<div className="star-save" onClick={handleUnSaveClick}>

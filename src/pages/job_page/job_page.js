@@ -2,8 +2,8 @@ import React from "react";
 import { JobCard } from "./job_card/job_card"; // Note: Corrected component name to start with uppercase
 import { data } from '../../services/job';
 import { getAuthToken } from "../../services/auth";
-import JobSeekerDashboard from "../job-seeker/job-seeker-dashboard";
 import { useRef, useState, useEffect } from "react";
+import { FaSearch } from "react-icons/fa";
 import axios from "axios";
 
 export const JobPage = () => {
@@ -104,23 +104,24 @@ export const JobPage = () => {
                 <div className="row h-100 justify-content-center align-items-center">
                     <div className="col-xl-12">
                         <div className="card mb-4">
-                            <div className="card-header">Job Postings</div>
+                            {/* <div className="card-header">Job Postings</div>
                             <div className="card-body" style={{ backgroundColor: "#F8F8F8" }}>
                                 <div className="row mb-3">
                                     <label className="small mb-1" htmlFor="name">
                                         Search (Search by industry or location or jobTitle or salaryRange or date)
-                                    </label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="name"
-                                        value={search}
-                                        onChange={(e) => {
-                                            setSearch(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                                    </label> */}
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="name"
+                                value={search}
+                                placeholder="Search by industry, location, jobTitle, salaryRange or date"
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                }}
+                            />
+                            {/* </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -139,6 +140,7 @@ export const JobPage = () => {
                     employerName={job.employerName}
                     jobType={job.job_type}
                     jobLocation={job.location}
+                    jobAccepted={job.accepted_by_admin}
                     isSaved={isSaved(job.jobId)}
                 // getID={getID}
                 />

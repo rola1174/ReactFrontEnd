@@ -15,7 +15,6 @@ import EmployerDashboard from "./pages/employer/employer-dashboard";
 import CreateEmployer from "./pages/admin/home/registerNewEmployer";
 import AcceptJob from "./pages/admin/home/accept-jobPost/accept-jobPost";
 import RejectJob from "./pages/admin/home/reject-jobPost/reject-jobPost";
-import JobSeekerDashboard from "./pages/job-seeker/job-seeker-dashboard";
 import ChatApp from "./pages/communication/ChatApp";
 
 export const routes = createBrowserRouter([
@@ -34,10 +33,6 @@ export const routes = createBrowserRouter([
       {
         path: "/communication",
         element: <ChatApp />,
-      },
-      {
-        path: "/job-seeker",
-        element: <JobSeekerDashboard />,
       },
       {
         // Guard

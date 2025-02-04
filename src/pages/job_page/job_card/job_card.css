@@ -145,3 +145,8 @@
   right: 140px;
   font-size: 25px;
 }
+
+.jobAccepted {
+  padding-left: 226px;
+  color: green;
+}
